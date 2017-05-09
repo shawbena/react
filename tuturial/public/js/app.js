@@ -8,7 +8,7 @@
 
 //props
 /*
-Comment 组件接收来自父组件的数据，可以从子组件的 'property' 上获取父组件传递的数据，可使用 this.props 访问这些 'properties', 使用 props 我们便可读取从 CommentList 传递给 Comment 的数据。
+ Comment 组件接收来自父组件的数据，可以从子组件的 'property' 上获取父组件传递的数据，可使用 this.props 访问这些 'properties', 使用 props 我们便可读取从 CommentList 传递给 Comment 的数据。
 在 JSX 中，通过将 JavaScript 表达式包括在花括号中（作为属性或 child），你可以往树中丢文本或 React 组件。可以通过 this.props 的键访问传递给组件的命名属性，通过 this.props.children 访问任何嵌套的元素。//此处不太好理解
 */
 var Comment = React.createClass({
@@ -71,6 +71,9 @@ var CommentBox = React.createClass({
     getInitialState: function(){
         return {data: []};
     },
+	/*
+	 组件第一次渲染时 React 会自动调用 componentDidMount，动态更新的关键是调用 this.setState().我们用从服务器获取到的新数组代替旧的数组，UI 自身也会自动更新，因为这些响应，动态更新仅需要添加很少的变化。
+	*/
     componentDidMount: function(){
         $.ajax({
             url: this.props.url,
@@ -84,6 +87,20 @@ var CommentBox = React.createClass({
             }.bind(this)
         });
     },
+	hangleCommentSubmit: function(Comment){
+		$.ajax({
+			url: this.props.url,
+			dataType: 'json',
+			type: 'post',
+			data: comment,
+			success: function(data){
+				this.setState({data: data});
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.log(this.props.url, status, err.toStirng());
+			}.bind(this)
+		});
+	},
     render: function(){
         return (
             <div className="comment-box">
