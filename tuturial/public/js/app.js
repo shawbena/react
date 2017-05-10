@@ -47,6 +47,14 @@ var CommentList = React.createClass({
         );
     }
 });
+/*
+ Controlled components
+ These <input> elements with a value set are called controlled components. Read more about controlled components on the Forms article.
+*/
+/*
+ 事件
+ React 用 camelCase 命名习惯为组件添加事件处理程序。我们给两个 <input> 元素添加 onChange 事件处理程序。现在，当用户往 <input> 中输入文本时，附加的 onChange 回调被触发并且组件的 state 被修改。接下来更新 input 元素的值来反映组件的 state.
+*/
 var CommentForm = React.createClass({
     getInitialState: function(){
         return {author: '', text: ''};
@@ -64,14 +72,14 @@ var CommentForm = React.createClass({
         if(!text || !author){
             return;
         }
-        // TODO: send request to the server
+        this.props.onCommentSubmit({author: author, text: text});
         this.setState({author: '', text: ''});
     },
     render: function () {
         return (
             <form className="comment-form" onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Your name" value="{this.state.author}" onChange={this.handleAuthorChange} />
-                <input type="text" placeholder="Say something..." value="{this.state.text}" onChange={this.handleTextChange}/>
+                <input type="text" placeholder="Your name" value={this.state.author} onChange={this.handleAuthorChange} />
+                <input type="text" placeholder="Say something..." value={this.state.text} onChange={this.handleTextChange}/>
                 <input type="submit" value="Post"/>
             </form>
         );
@@ -99,6 +107,28 @@ var CommentBox = React.createClass({
             console.log('error');
         });
     },
+    /*
+     当用户提交评论时会调用 handleCommentSubmit(), 这样父组件就可以更新评论了
+     子组件通过父组件提供的函数给父组件传递数据
+    */
+    handleCommentSubmit: function(comment){
+        let comments = this.state.data;
+        let _this = this;
+        G.ajax({
+            url: this.props.url,
+            method: 'post',
+            data: comment
+        }, function(res){
+            console.log(res.msg);
+            comments.push(res.data);
+            _this.setState(comments);
+        this.setState(comments);
+        }, function(){
+
+        });
+        // this.loadCommentsFromServer();
+        
+    },
     //getInitialState()在组件的生命周期内只执行一次并设置组件的初始状态
     getInitialState: function () {
         return { data: [] };
@@ -110,26 +140,12 @@ var CommentBox = React.createClass({
        this.loadCommentsFromServer();
        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
-    hangleCommentSubmit: function (Comment) {
-        $.ajax({
-            url: this.props.url,
-            dataType: 'json',
-            type: 'post',
-            data: comment,
-            success: function (res) {
-                this.setState({ data: res });
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.log(this.props.url, status, err.toStirng());
-            }.bind(this)
-        });
-    },
     render: function () {
         return (
             <div className="comment-box">
                 <h1>Comments</h1>
                 <CommentList data={this.state.data} />
-                <CommentForm />
+                <CommentForm onCommentSubmit={this.handleCommentSubmit} />
             </div>
         );
     }

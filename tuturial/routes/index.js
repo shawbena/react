@@ -15,7 +15,11 @@ router.get('/api/comments', function(req, res){
   res.json({data: comments});
 });
 //提交评论
-router.post('/api/comments', function(req, res){});
+router.post('/api/comments', function(req, res){
+  console.log(req.body);
+  res.set('Content-Type', 'application/json');
+  res.json({data: req.body, msg: '评论提交成功', code: 'ok'});
+});
 router.get('/download', function(req, res){
   res.download(path.resolve(__dirname, '../download/1.txt'), '1.txt', function(err){
     res.end('an error happend' + err);

@@ -305,6 +305,9 @@
             user, 
             password,
             headers:        <Object>, <header, value> pairs
+                {
+                    Content-Type: 'application/json'
+                }
             timeout:        <Number>
             timeoutFn:      <Function>
             withCredentials: <Boolean>,
@@ -324,6 +327,9 @@
         }
         if (!options.method) {
             options.method = 'get';
+        }
+        if(!options.headers || typeof options.headers != 'object'){
+            options.headers = {};
         }
         //get 请求, data 转换为 url 片段, 如果 options.url 中有查询字符串则会被保留
         //其他请求方法会把 options.url 中的查询字符串丢掉
@@ -347,14 +353,19 @@
 
         xhr = new XMLHttpRequest();
         xhr.on = xhr.addEventListener;
-        if(typeof options.responseType == 'string'){
+        if (typeof options.responseType == 'string') {
             xhr.responseType = options.responseType;
-        }else{
+        } else {
             options.responseType = 'json';
             xhr.responseType = 'json';
         }
         xhr.open(options.method, options.url, options.async || true, options.user || undefined, options.password || undefined);
         //设置请求头
+        //非 get 请求，默认 applicatin/json
+        if(options.method != 'get' && !options.headers['Content-Type']){
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            options.data = JSON.stringify(options.data);
+        }
         if (typeof options.headers == 'object') {
             for (let key in options.headers) {
                 xhr.setRequestHeader(key, options.headers[key]);
@@ -368,8 +379,8 @@
             }
         });
         xhr.on('load', function () { });
-        xhr.on('error', function (err) { 
-            if(typeof error == 'function'){
+        xhr.on('error', function (err) {
+            if (typeof error == 'function') {
                 error(err);
             }
         });
@@ -387,9 +398,9 @@
                 throwError('成功回调不存在或者不是函数');
             }
             let res;
-            if(xhr.responseType == '' || xhr.responseType == 'text'){
+            if (xhr.responseType == '' || xhr.responseType == 'text') {
                 res = JSON.parse(res.response);
-            }else{
+            } else {
                 res = xhr.response;
             }
             success(res);
