@@ -12,12 +12,12 @@
 在 JSX 中，通过将 JavaScript 表达式包括在花括号中（作为属性或 child），你可以往树中丢文本或 React 组件。可以通过 this.props 的键访问传递给组件的命名属性，通过 this.props.children 访问任何嵌套的元素。//此处不太好理解
 */
 var Comment = React.createClass({
-    rawMarkup: function(){
+    rawMarkup: function () {
         var md = new Remarkable();
         var rawMarkup = md.render(this.props.children.toString());
-        return {__html: rawMarkup};
+        return { __html: rawMarkup };
     },
-    render: function(){
+    render: function () {
         return (
             <div className="comment">
                 <h2 className="comment-author">
@@ -31,8 +31,8 @@ var Comment = React.createClass({
 });
 
 var CommentList = React.createClass({
-    render: function(){
-        var commentNodes = this.props.data.map(function(comment){
+    render: function () {
+        var commentNodes = this.props.data.map(function (comment) {
             //返回的东西好奇怪
             return (
                 <Comment author={comment.author} key={comment.id}>
@@ -48,11 +48,32 @@ var CommentList = React.createClass({
     }
 });
 var CommentForm = React.createClass({
-    render: function(){
+    getInitialState: function(){
+        return {author: '', text: ''};
+    },
+    handleAuthorChange: function(e){
+        this.setState({author: e.target.value});
+    },
+    handleTextChange: function(e){
+        this.setState({text: e.target.value});
+    },
+    handleSubmit: function(e){
+        e.preventDefault();
+        let author = this.state.author.trim();
+        let text = this.state.text.trim();
+        if(!text || !author){
+            return;
+        }
+        // TODO: send request to the server
+        this.setState({author: '', text: ''});
+    },
+    render: function () {
         return (
-            <div className="comment-form">
-                Hello, world! I am a CommentForm.
-            </div>
+            <form className="comment-form" onSubmit={this.handleSubmit}>
+                <input type="text" placeholder="Your name" value="{this.state.author}" onChange={this.handleAuthorChange} />
+                <input type="text" placeholder="Say something..." value="{this.state.text}" onChange={this.handleTextChange}/>
+                <input type="submit" value="Post"/>
+            </form>
         );
     }
 });
@@ -67,41 +88,43 @@ var CommentForm = React.createClass({
 当获取到数据时，我们将更改我们所有的评论数据。让我们绘画 CommentBox 组件添加一个数组的评论数据组作为组件的 state.
 */
 var CommentBox = React.createClass({
+    loadCommentsFromServer: function(){
+        let _this = this;
+        G.ajax({
+            url: this.props.url,
+            // responseType: 'json'//默认值
+        }, function(res){
+            _this.setState({data: res.data});
+        }, function(err){
+            console.log('error');
+        });
+    },
     //getInitialState()在组件的生命周期内只执行一次并设置组件的初始状态
-    getInitialState: function(){
-        return {data: []};
+    getInitialState: function () {
+        return { data: [] };
     },
 	/*
 	 组件第一次渲染时 React 会自动调用 componentDidMount，动态更新的关键是调用 this.setState().我们用从服务器获取到的新数组代替旧的数组，UI 自身也会自动更新，因为这些响应，动态更新仅需要添加很少的变化。
 	*/
-    componentDidMount: function(){
+    componentDidMount: function () {
+       this.loadCommentsFromServer();
+       setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    },
+    hangleCommentSubmit: function (Comment) {
         $.ajax({
             url: this.props.url,
             dataType: 'json',
-            cache: false,
-            success: function(data){
-                this.setState({data: data});
+            type: 'post',
+            data: comment,
+            success: function (res) {
+                this.setState({ data: res });
             }.bind(this),
-            eror: function(xhr, status, err){
+            error: function (xhr, status, err) {
                 console.log(this.props.url, status, err.toStirng());
             }.bind(this)
         });
     },
-	hangleCommentSubmit: function(Comment){
-		$.ajax({
-			url: this.props.url,
-			dataType: 'json',
-			type: 'post',
-			data: comment,
-			success: function(data){
-				this.setState({data: data});
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.log(this.props.url, status, err.toStirng());
-			}.bind(this)
-		});
-	},
-    render: function(){
+    render: function () {
         return (
             <div className="comment-box">
                 <h1>Comments</h1>
@@ -120,6 +143,6 @@ ReactDOM 模块暴露特定 DOM 的方法，React 是不同平台（如, React N
  移除 data 属性，改为从 url 获取。在服务器响应返回前，组件不会有任何数据。//返回的数据在哪里？
 */
 ReactDOM.render(
-    <CommentBox url="/api/comments" />,
+    <CommentBox url="/api/comments" poolInterval={2000} />,
     document.getElementById('content')
 );
