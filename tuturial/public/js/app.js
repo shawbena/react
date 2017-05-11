@@ -162,3 +162,19 @@ ReactDOM.render(
     <CommentBox url="/api/comments" poolInterval={2000} />,
     document.getElementById('content')
 );
+/*
+Plain JavaScript
+var CommentBox = React.createClass({displayName: 'CommentBox',
+  render: function() {
+    return (
+      React.createElement('div', {className: "commentBox"},
+        "Hello, world! I am a CommentBox."
+      )
+    );
+  }
+});
+ReactDOM.render(
+  React.createElement(CommentBox, null),
+  document.getElementById('content')
+);
+*/
