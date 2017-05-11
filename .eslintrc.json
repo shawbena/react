@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion":2015,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "script"
+    },
+    "rules": {
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "semi": ["error", "always"],
+        "no-console": "warn",
+        "no-empty": "warn",
+        "no-ex-assign": "error",
+        "no-extra-semi": "warn",
+        "no-unexpected-multiline": "warn",
+        "use-isnan": "warn",
+        "curly": "warn",
+        "default-case": "warn",
+        "no-alert": "warn",
+        "no-caller": "warn",
+        "no-else-return": "warn",
+        "no-extra-bind": "warn",
+        "no-fallthrough": "warn",
+        "no-global-assign": "error",
+        "no-multi-spaces": "warn",
+        "no-redeclare": "error",
+        "no-self-assign": "error",
+        "no-useless-return": "error",
+        "no-trailing-spaces": "warn",
+        "spaced-comment": "warn",
+        "no-multiple-empty-lines": "warn",
+        "no-mixed-spaces-and-tabs": "warn",
+        "newline-before-return": "warn",
+        "newline-after-var": "warn",
+        "indent": "warn",
+        "comma-dangle": "error",
+        "block-spacing": "warn",
+        "eol-last": ["error", "always"]
+    }
+}
