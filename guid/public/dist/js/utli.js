@@ -1,78 +1,72 @@
-(function() {
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function () {
     "use strict";
-    if (!('on' in Element.prototype)) {
-        Element.prototype.on = Element.prototype.addEventListener;
-    }
 
-    function $(selector) {
-        if (typeof selecto != 'string') {
-            return null;
-        }
-        return document.querySelector(selector);
-    }
-    const BASEURL = window.location.protocol + "//" + window.location.host;
+    var BASEURL = window.location.protocol + "//" + window.location.host;
 
-    // encode(), decode(), _utf8_encode(), _utf8_decode()
-    let Base64 = {
+    var Base64 = {
         "_keyStr": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-        _utf8_encode: function(string) {
+        _utf8_encode: function _utf8_encode(string) {
             string = string.replace(/\r\n/g, "\n");
-            let utftext = "";
-
-            for (let n = 0; n < string.length; n++) {
-                let c = string.charCodeAt(n);
-
+            var utftext = "";
+            for (var n = 0; n < string.length; n++) {
+                var c = string.charCodeAt(n);
                 if (c < 128) {
                     utftext += String.fromCharCode(c);
-                } else if ((c > 127) && (c < 2048)) {
-                    utftext += String.fromCharCode((c >> 6) | 192);
-                    utftext += String.fromCharCode((c & 63) | 128);
+                } else if (c > 127 && c < 2048) {
+                    utftext += String.fromCharCode(c >> 6 | 192);
+                    utftext += String.fromCharCode(c & 63 | 128);
                 } else {
-                    utftext += String.fromCharCode((c >> 12) | 224);
-                    utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-                    utftext += String.fromCharCode((c & 63) | 128);
+                    utftext += String.fromCharCode(c >> 12 | 224);
+                    utftext += String.fromCharCode(c >> 6 & 63 | 128);
+                    utftext += String.fromCharCode(c & 63 | 128);
                 }
             }
-
             return utftext;
         },
-        _utf8_decode: function(utftext) {
-            let string = "";
-            let i = 0;
-            let c = c1 = c2 = 0;
-
+        _utf8_decode: function _utf8_decode(utftext) {
+            var string = "";
+            var i = 0;
+            var c = c1 = c2 = 0;
             while (i < utftext.length) {
                 c = utftext.charCodeAt(i);
                 if (c < 128) {
                     string += String.fromCharCode(c);
                     i++;
-                } else if ((c > 191) && (c < 224)) {
+                } else if (c > 191 && c < 224) {
                     c2 = utftext.charCodeAt(i + 1);
-                    string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                    string += String.fromCharCode((c & 31) << 6 | c2 & 63);
                     i += 2;
                 } else {
                     c2 = utftext.charCodeAt(i + 1);
                     c3 = utftext.charCodeAt(i + 2);
-                    string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                    string += String.fromCharCode((c & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
                     i += 3;
                 }
             }
-
             return string;
         },
-        encode: function(input) {
-            let output = "";
-            let chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-            let i = 0;
-
+        encode: function encode(input) {
+            var output = "";
+            var chr1 = void 0,
+                chr2 = void 0,
+                chr3 = void 0,
+                enc1 = void 0,
+                enc2 = void 0,
+                enc3 = void 0,
+                enc4 = void 0;
+            var i = 0;
             input = this._utf8_encode(input);
             while (i < input.length) {
                 chr1 = input.charCodeAt(i++);
                 chr2 = input.charCodeAt(i++);
                 chr3 = input.charCodeAt(i++);
                 enc1 = chr1 >> 2;
-                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                enc2 = (chr1 & 3) << 4 | chr2 >> 4;
+                enc3 = (chr2 & 15) << 2 | chr3 >> 6;
                 enc4 = chr3 & 63;
                 if (isNaN(chr2)) {
                     enc3 = enc4 = 64;
@@ -81,24 +75,27 @@
                 }
                 output = output + this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) + this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
             }
-
             return output;
         },
-        decode: function(input) {
-            let output = "";
-            let chr1, chr2, chr3;
-            let enc1, enc2, enc3, enc4;
-            let i = 0;
-
+        decode: function decode(input) {
+            var output = "";
+            var chr1 = void 0,
+                chr2 = void 0,
+                chr3 = void 0;
+            var enc1 = void 0,
+                enc2 = void 0,
+                enc3 = void 0,
+                enc4 = void 0;
+            var i = 0;
             input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
             while (i < input.length) {
                 enc1 = this._keyStr.indexOf(input.charAt(i++));
                 enc2 = this._keyStr.indexOf(input.charAt(i++));
                 enc3 = this._keyStr.indexOf(input.charAt(i++));
                 enc4 = this._keyStr.indexOf(input.charAt(i++));
-                chr1 = (enc1 << 2) | (enc2 >> 4);
-                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                chr3 = ((enc3 & 3) << 6) | enc4;
+                chr1 = enc1 << 2 | enc2 >> 4;
+                chr2 = (enc2 & 15) << 4 | enc3 >> 2;
+                chr3 = (enc3 & 3) << 6 | enc4;
                 output = output + String.fromCharCode(chr1);
                 if (enc3 != 64) {
                     output = output + String.fromCharCode(chr2);
@@ -108,158 +105,153 @@
                 }
             }
             output = this._utf8_decode(output);
-
             return output;
         }
     };
-    /*
-     * md5
-     * @return string
-     */
 
     function md5(str) {
 
-        let rotateLeft = function(lValue, iShiftBits) {
-            return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
+        var rotateLeft = function rotateLeft(lValue, iShiftBits) {
+            return lValue << iShiftBits | lValue >>> 32 - iShiftBits;
         };
 
-        let addUnsigned = function(lX, lY) {
-            let lX4, lY4, lX8, lY8, lResult;
-            lX8 = (lX & 0x80000000);
-            lY8 = (lY & 0x80000000);
-            lX4 = (lX & 0x40000000);
-            lY4 = (lY & 0x40000000);
+        var addUnsigned = function addUnsigned(lX, lY) {
+            var lX4 = void 0,
+                lY4 = void 0,
+                lX8 = void 0,
+                lY8 = void 0,
+                lResult = void 0;
+            lX8 = lX & 0x80000000;
+            lY8 = lY & 0x80000000;
+            lX4 = lX & 0x40000000;
+            lY4 = lY & 0x40000000;
             lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
-            if (lX4 & lY4) return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+            if (lX4 & lY4) return lResult ^ 0x80000000 ^ lX8 ^ lY8;
             if (lX4 | lY4) {
-                if (lResult & 0x40000000) return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
-                return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+                if (lResult & 0x40000000) return lResult ^ 0xC0000000 ^ lX8 ^ lY8;else return lResult ^ 0x40000000 ^ lX8 ^ lY8;
             } else {
-                return (lResult ^ lX8 ^ lY8);
+                return lResult ^ lX8 ^ lY8;
             }
         };
 
-        let F = function(x, y, z) {
-            return (x & y) | ((~x) & z);
+        var F = function F(x, y, z) {
+            return x & y | ~x & z;
         };
 
-        let G = function(x, y, z) {
-            return (x & z) | (y & (~z));
+        var G = function G(x, y, z) {
+            return x & z | y & ~z;
         };
 
-        let H = function(x, y, z) {
-            return (x ^ y ^ z);
+        var H = function H(x, y, z) {
+            return x ^ y ^ z;
         };
 
-        let I = function(x, y, z) {
-            return (y ^ (x | (~z)));
+        var I = function I(x, y, z) {
+            return y ^ (x | ~z);
         };
 
-        let FF = function(a, b, c, d, x, s, ac) {
+        var FF = function FF(a, b, c, d, x, s, ac) {
             a = addUnsigned(a, addUnsigned(addUnsigned(F(b, c, d), x), ac));
-
             return addUnsigned(rotateLeft(a, s), b);
         };
 
-        let GG = function(a, b, c, d, x, s, ac) {
+        var GG = function GG(a, b, c, d, x, s, ac) {
             a = addUnsigned(a, addUnsigned(addUnsigned(G(b, c, d), x), ac));
-
             return addUnsigned(rotateLeft(a, s), b);
         };
 
-        let HH = function(a, b, c, d, x, s, ac) {
+        var HH = function HH(a, b, c, d, x, s, ac) {
             a = addUnsigned(a, addUnsigned(addUnsigned(H(b, c, d), x), ac));
-
             return addUnsigned(rotateLeft(a, s), b);
         };
 
-        let II = function(a, b, c, d, x, s, ac) {
+        var II = function II(a, b, c, d, x, s, ac) {
             a = addUnsigned(a, addUnsigned(addUnsigned(I(b, c, d), x), ac));
-
             return addUnsigned(rotateLeft(a, s), b);
         };
 
-        let convertToWordArray = function(string) {
-            let lWordCount;
-            let lMessageLength = string.length;
-            let lNumberOfWordsTempOne = lMessageLength + 8;
-            let lNumberOfWordsTempTwo = (lNumberOfWordsTempOne - (lNumberOfWordsTempOne % 64)) / 64;
-            let lNumberOfWords = (lNumberOfWordsTempTwo + 1) * 16;
-            let lWordArray = Array(lNumberOfWords - 1);
-            let lBytePosition = 0;
-            let lByteCount = 0;
-
+        var convertToWordArray = function convertToWordArray(string) {
+            var lWordCount = void 0;
+            var lMessageLength = string.length;
+            var lNumberOfWordsTempOne = lMessageLength + 8;
+            var lNumberOfWordsTempTwo = (lNumberOfWordsTempOne - lNumberOfWordsTempOne % 64) / 64;
+            var lNumberOfWords = (lNumberOfWordsTempTwo + 1) * 16;
+            var lWordArray = Array(lNumberOfWords - 1);
+            var lBytePosition = 0;
+            var lByteCount = 0;
             while (lByteCount < lMessageLength) {
-                lWordCount = (lByteCount - (lByteCount % 4)) / 4;
-                lBytePosition = (lByteCount % 4) * 8;
-                lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount) << lBytePosition));
+                lWordCount = (lByteCount - lByteCount % 4) / 4;
+                lBytePosition = lByteCount % 4 * 8;
+                lWordArray[lWordCount] = lWordArray[lWordCount] | string.charCodeAt(lByteCount) << lBytePosition;
                 lByteCount++;
             }
-            lWordCount = (lByteCount - (lByteCount % 4)) / 4;
-            lBytePosition = (lByteCount % 4) * 8;
-            lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
+            lWordCount = (lByteCount - lByteCount % 4) / 4;
+            lBytePosition = lByteCount % 4 * 8;
+            lWordArray[lWordCount] = lWordArray[lWordCount] | 0x80 << lBytePosition;
             lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
             lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
-
             return lWordArray;
         };
 
-        let wordToHex = function(lValue) {
-            let WordToHexValue = "",
+        var wordToHex = function wordToHex(lValue) {
+            var WordToHexValue = "",
                 WordToHexValueTemp = "",
-                lByte, lCount;
-
+                lByte = void 0,
+                lCount = void 0;
             for (lCount = 0; lCount <= 3; lCount++) {
-                lByte = (lValue >>> (lCount * 8)) & 255;
+                lByte = lValue >>> lCount * 8 & 255;
                 WordToHexValueTemp = "0" + lByte.toString(16);
                 WordToHexValue = WordToHexValue + WordToHexValueTemp.substr(WordToHexValueTemp.length - 2, 2);
             }
-
             return WordToHexValue;
         };
 
-        let uTF8Encode = function(string) {
+        var uTF8Encode = function uTF8Encode(string) {
             string = string.replace(/\x0d\x0a/g, "\x0a");
-            let output = "";
-
-            for (let n = 0; n < string.length; n++) {
-                let c = string.charCodeAt(n);
-
+            var output = "";
+            for (var n = 0; n < string.length; n++) {
+                var c = string.charCodeAt(n);
                 if (c < 128) {
                     output += String.fromCharCode(c);
-                } else if ((c > 127) && (c < 2048)) {
-                    output += String.fromCharCode((c >> 6) | 192);
-                    output += String.fromCharCode((c & 63) | 128);
+                } else if (c > 127 && c < 2048) {
+                    output += String.fromCharCode(c >> 6 | 192);
+                    output += String.fromCharCode(c & 63 | 128);
                 } else {
-                    output += String.fromCharCode((c >> 12) | 224);
-                    output += String.fromCharCode(((c >> 6) & 63) | 128);
-                    output += String.fromCharCode((c & 63) | 128);
+                    output += String.fromCharCode(c >> 12 | 224);
+                    output += String.fromCharCode(c >> 6 & 63 | 128);
+                    output += String.fromCharCode(c & 63 | 128);
                 }
             }
-
             return output;
         };
 
-        return (function(string) {
-            let x = Array();
-            let k, AA, BB, CC, DD, a, b, c, d;
-            let S11 = 7,
+        return function (string) {
+            var x = Array();
+            var k = void 0,
+                AA = void 0,
+                BB = void 0,
+                CC = void 0,
+                DD = void 0,
+                a = void 0,
+                b = void 0,
+                c = void 0,
+                d = void 0;
+            var S11 = 7,
                 S12 = 12,
                 S13 = 17,
                 S14 = 22;
-            let S21 = 5,
+            var S21 = 5,
                 S22 = 9,
                 S23 = 14,
                 S24 = 20;
-            let S31 = 4,
+            var S31 = 4,
                 S32 = 11,
                 S33 = 16,
                 S34 = 23;
-            let S41 = 6,
+            var S41 = 6,
                 S42 = 10,
                 S43 = 15,
                 S44 = 21;
-
             string = uTF8Encode(string);
             x = convertToWordArray(string);
             a = 0x67452301;
@@ -340,27 +332,13 @@
                 c = addUnsigned(c, CC);
                 d = addUnsigned(d, DD);
             }
-            let tempValue = wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d);
-
-
+            var tempValue = wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d);
             return tempValue.toLowerCase();
-        })(str);
+        }(str);
     }
-    // 处理查询字符串，encode(), decode()
-    /*
-        encode(obj, name, sep, eq)
-        将对象解析为 encodeURIComponent() 编码的字符串，object 是必须的。
-        如果有 name, obj 应该为 <String> 类型。
-        如果 obj 中属性值为数组：
-            obj{
-                name: ['xiaoming', 'xiaoqiang']
-            }
-        解析结果为：
-            name=xiaoming&name=xiaoqiang
 
-    */
-    let queryString = {
-        decode(qs, sep, eq, options) {
+    var queryString = {
+        decode: function decode(qs, sep, eq, options) {
             sep = sep || '&';
             eq = eq || '=';
             var obj = {};
@@ -370,17 +348,14 @@
             }
 
             var regexp = /\+/g;
-
             qs = qs.split(sep);
 
             var maxKeys = 1000;
-
             if (options && typeof options.maxKeys === 'number') {
                 maxKeys = options.maxKeys;
             }
 
             var len = qs.length;
-            // maxKeys <= 0 means that we should not limit keys count
 
             if (maxKeys > 0 && len > maxKeys) {
                 len = maxKeys;
@@ -389,7 +364,10 @@
             for (var i = 0; i < len; ++i) {
                 var x = qs[i].replace(regexp, '%20'),
                     idx = x.indexOf(eq),
-                    kstr, vstr, k, v;
+                    kstr,
+                    vstr,
+                    k,
+                    v;
 
                 if (idx >= 0) {
                     kstr = x.substr(0, idx);
@@ -413,83 +391,51 @@
 
             return obj;
         },
-        encode(obj, sep, eq, name) {
+        encode: function encode(obj, sep, eq, name) {
             sep = sep || '&';
             eq = eq || '=';
             if (obj === null) {
                 obj = undefined;
             }
 
-            if (typeof obj === 'object') {
-                return Object.keys(obj).map(function(k) {
+            if ((typeof obj === "undefined" ? "undefined" : _typeof(obj)) === 'object') {
+                return Object.keys(obj).map(function (k) {
                     var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
                     if (Array.isArray(obj[k])) {
-                        return obj[k].map(function(v) {
+                        return obj[k].map(function (v) {
                             return ks + encodeURIComponent(stringifyPrimitive(v));
                         }).join(sep);
+                    } else {
+                        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
                     }
-                    return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-
                 }).join(sep);
-
             }
 
-            if (!name) {
-                return '';
-            }
-
-            return encodeURIComponent(stringifyPrimitive(name)) + eq +
-                encodeURIComponent(stringifyPrimitive(obj));
+            if (!name) return '';
+            return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
         }
     };
-    /*
-        @params
-        data: {
-            method:         <String>, 默认 get
-            url:            <String>,
-            data:           <Object>
-            async:          <Boolean>
-            responseType:   <xhr.responseType> 默认 '', 值可以为 '', 'json', 'arraybuffer', 'blob', 'text', 'document'
-            user,
-            password,
-            headers:        <Object>, <header, value> pairs
-                {
-                    Content-Type: 'application/json'
-                }
-            timeout:        <Number>
-            timeoutFn:      <Function>
-            withCredentials: <Boolean>,
-            abort:          <function>
-        }
-        success: a function will be called if response is suit for you
-        error: a function will be called when error happens
-        @return xhr <XMLHttpRequest>
-        要终止请求，调用 xhr.abort()
-        注：同步ajax目前不支持
-    */
 
     function ajax(options, success, error, complete) {
-        let ajaxMethods = ['get', 'post', 'put', 'delete']; // 请求方式可能是任意合法字符串
-        let xhr;
-
+        var ajaxMethods = ['get', 'post', 'put', 'delete'];
+        var xhr = void 0;
         if (typeof options.url != 'string') {
             throwError('url 不存在或不是字符串！');
         }
         if (!options.method) {
             options.method = 'get';
         }
-        if (!options.headers || typeof options.headers != 'object') {
+        if (!options.headers || _typeof(options.headers) != 'object') {
             options.headers = {};
         }
-        // get 请求, data 转换为 url 片段, 如果 options.url 中有查询字符串则会被保留
-        // 其他请求方法会把 options.url 中的查询字符串丢掉
+
         if (options.method == 'get') {
-            let url = options.url.split('?')[0];
-            let urlQueryString = options.url.split('?')[1];
-            let urlComponent = '';
+            var url = options.url.split('?')[0];
+            var urlQueryString = options.url.split('?')[1];
+            var urlComponent = '';
 
             urlComponent += queryString.encode(queryString.decode(urlQueryString));
-            if (typeof options.data == 'object') {
+            if (_typeof(options.data) == 'object') {
                 urlComponent = queryString.encode(data);
             }
 
@@ -510,43 +456,43 @@
             xhr.responseType = 'json';
         }
         xhr.open(options.method, options.url, options.async || true, options.user || undefined, options.password || undefined);
-        // 设置请求头
-        // 非 get 请求，默认 applicatin/json
+
         if (options.method != 'get' && !options.headers['Content-Type']) {
             xhr.setRequestHeader('Content-Type', 'application/json');
             options.data = JSON.stringify(options.data);
         }
-        if (typeof options.headers == 'object') {
-            for (let key in options.headers) {
+        if (_typeof(options.headers) == 'object') {
+            for (var key in options.headers) {
                 xhr.setRequestHeader(key, options.headers[key]);
             }
         }
-        xhr.on('readystatechange', function() {
+        xhr.on('readystatechange', function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     processResult();
                 }
             }
         });
-        xhr.on('load', function() {});
-        xhr.on('error', function(err) {
+        if (typeof options.progress == 'function') {
+            xhr.upload.on('progress', options.progress);
+        }
+        xhr.on('load', function () {});
+        xhr.on('error', function (err) {
             if (typeof error == 'function') {
                 error(err);
             }
         });
-        xhr.on('process', function() {});
-        xhr.on('abort', function() {});
-        xhr.on('timeout', function() {});
+
+        xhr.on('abort', function () {});
+        xhr.on('timeout', function () {});
 
         xhr.send(options.data || undefined);
 
-        // 处理响应原始数据
         function processResult() {
             if (typeof success != 'function') {
                 throwError('成功回调不存在或者不是函数');
             }
-            let res;
-
+            var res = void 0;
             if (xhr.responseType == '' || xhr.responseType == 'text') {
                 res = JSON.parse(res.response);
             } else {
@@ -554,7 +500,6 @@
             }
             success(res);
         }
-
         return xhr;
     }
 
@@ -562,94 +507,84 @@
         if (!XMLHttpRequest) {
             throwError('您的浏览器不支持 ajax!');
         }
-
         return new XMLHttpRequest();
     }
-    /**
-     * 获取对象的原始类型
-     * @param
-     * @return {String}
-     * 没有什么用，将会被废弃
-     */
+
     function getObjectType(obj) {
-        let type = Object.prototype.toString.call(obj);
-
-
+        var type = Object.prototype.toString.call(obj);
         return type.replace(/(^\[object\s)(\w+)(\]$)/, '$2');
     }
-
+    
+    /**
+     * 字符串化输入
+     * @param {any} v
+     * @returns <String>
+     */
     function stringifyPrimitive(v) {
-        switch (typeof v) {
+        switch (typeof v === "undefined" ? "undefined" : _typeof(v)) {
             case 'string':
                 return v;
-
             case 'boolean':
                 return v ? 'true' : 'false';
-
             case 'number':
-                return isFinite(v) ? v : '';
-
+                return isFinite(v) ? v.toString() : '';
             default:
                 return '';
         }
-    }
+    };
 
     function hasOwnProperty(obj, prop) {
         return Object.prototype.hasOwnProperty.call(obj, prop);
     }
-    // 抛异常
+
     function throwError(errMessage) {
         throw new Error(errMessage);
     }
-    // 是否是中文字符
+
     function isChineseChar(str) {
-        return /^[\u4E00-\u9FA5\uF900-\uFA2D]*$/.test(str);
+        return (/^[\u4E00-\u9FA5\uF900-\uFA2D]*$/.test(str)
+        );
     }
 
-    // 格式化日期
-    function formatDate(date = new Date(), format = '-') {
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
-        let day = date.getDate() + 1 < 10 ? '0' + (date.getDate()) : date.getDate();
+    function formatDate() {
+        var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
+        var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '-';
 
-        let dateStr = `${year}${format}${month}${format}${day}`;
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+        var day = date.getDate() + 1 < 10 ? '0' + date.getDate() : date.getDate();
 
-
+        var dateStr = "" + year + format + month + format + day;
         return dateStr;
     }
-    // 格式化时间
-    function formatTime(date = new Date(), format = ':') {
-        let hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
-        let minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-        let second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
 
-        let timeStr = `${hour}${format}${minute}${format}${second}`;
+    function formatTime() {
+        var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
+        var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ':';
 
+        var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+        var minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+        var second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
 
+        var timeStr = "" + hour + format + minute + format + second;
         return timeStr;
     }
 
-    // return random data, include end and start
     function randomData(start, end) {
         if (!(typeof start === 'number') && !(typeof end === 'number')) {
             console.log('unexpect params', start, end, 'params must be typeof number!');
-
             return null;
         }
-
         return Math.floor(Math.random() * (end - start + 1)) + start;
     }
 
-    // 数组去重, 汪修改原数组，返回去重后的新数组
     function removeRepeat(arr) {
         if (getObjectType(arr) != "Array") {
             throwError('参数不是数组：', +arr);
-
             return;
         }
-        let newArr = [];
-
-        arr.forEach(function(item) {
+        var newArr = [];
+        arr.forEach(function (item) {
             if (!(newArr.indexOf(item) > -1)) {
                 newArr.push(item);
             }
@@ -657,30 +592,21 @@
 
         return newArr;
     }
-    /*
-     *  将树结构数据处理成数组类型
-     *  递归，树不能太深，否则会很慢
-     *  node: Array | Object
-     *  propertyHasChild: String， 有子节点的属性
-     *  返回值：Array
-     */
-    function treeDataToArray(node, propertyHasChild) {
-        let result = [];
 
+    function treeDataToArray(node, propertyHasChild) {
+        var result = [];
         if (node instanceof Array) {
-            node.forEach(function(item) {
+            node.forEach(function (item) {
                 fun(item, propertyHasChild);
             });
         } else {
             fun(node, propertyHasChild);
         }
-
         return result;
 
         function fun(node, propertyHasChild) {
-            let obj = {};
-
-            for (let key in node) {
+            var obj = {};
+            for (var key in node) {
                 if (key == propertyHasChild) {
                     obj['childCount'] = node[key].length && node[key] instanceof Array ? node[key].length : 0;
                     continue;
@@ -688,28 +614,29 @@
                 obj[key] = node[key];
             }
             result.push(obj);
-            // 如果有子节点
+
             if (node[propertyHasChild] && node[propertyHasChild] instanceof Array && node[propertyHasChild].length) {
-                for (let i = 0; i < node[propertyHasChild].length; i++) {
+                for (var i = 0; i < node[propertyHasChild].length; i++) {
                     fun(node[propertyHasChild][i], propertyHasChild);
                 }
             }
         }
     }
-    // 删除值为空的属性，满足以下条件都会的属性都会被从对象中移除
-    // '' null, undefined, []
-    // 返回删除为空属性后的对象
-    function deleteEmptyProperty(obj) {
-        let deleteArr = ['', null, undefined, []];
 
-        for (let key in obj) {
-            if (deleteArr.some(function(item) {
-                    return obj[key] === item || isEmptypArr(obj[key]);
-                })) {
+    function deleteEmptyProperty(obj) {
+        var deleteArr = ['', null, undefined, []];
+
+        var _loop = function _loop(key) {
+            if (deleteArr.some(function (item) {
+                return obj[key] === item || isEmptypArr(obj[key]);
+            })) {
                 delete obj[key];
             }
-        }
+        };
 
+        for (var key in obj) {
+            _loop(key);
+        }
         return obj;
 
         function isEmptypArr(arr) {
@@ -717,47 +644,28 @@
         }
     }
 
-    /**
-     * 转义字符串
-     *
-     * @param <String> str, 要转义的字符串
-     * @returns <String> 转义后的字符串
-     */
-    function escapeString(str) {
-        if (typeof str != 'string') {
-            return '';
-        }
-        var div = document.createElement('div');
-        var script = '<script>3423</script>';
-
-        div.innerText = script;
-        var escapedScript = div.innerHTML;
-
-
-        return escapedScript;
-    }
-
-    let loading = {
+    var loading = {
         loadingComp: {},
-        show(msg) {},
-        hide() {
+        show: function show(msg) {},
+        hide: function hide() {
             if (this.loadingComp) {
                 this.loadingComp.shown = false;
             }
         }
     };
-    let Global = {
-        BASEURL,
-        ajax,
-        xhr,
-        throwError,
-        isChineseChar,
-        formatDate,
-        formatTime,
-        randomData,
-        removeRepeat,
-        loading
+    var Global = {
+        BASEURL: BASEURL,
+        ajax: ajax,
+        xhr: xhr,
+        throwError: throwError,
+        isChineseChar: isChineseChar,
+        formatDate: formatDate,
+        formatTime: formatTime,
+        randomData: randomData,
+        removeRepeat: removeRepeat,
+        stringifyPrimitive: stringifyPrimitive,
+        loading: loading
     };
 
-    window.G = Global;
+    window.Utli = Global;
 })();
