@@ -25,6 +25,9 @@
     "gulp-babel": "^6.1.2"
   },
   "babel": {
+    "ignore": ["public/src/**/*.min.js"],
+    "comments": false,
+    "minified": false,
     "presets": [
       "es2015",
       "react"

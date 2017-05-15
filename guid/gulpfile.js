@@ -1,11 +1,14 @@
 const gulp = require('gulp');
-const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 
-gulp.task('default', function(){
+//es6 + jsx -> es5
+gulp.task('es5-jsx', function(){
     return gulp.src('public/src/**/*.js')
-        .pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('public/dist'));
+});
+
+//default task
+gulp.task('default', ['es5-jsx'], function(){
+    console.log('tasks completed...');     
 });
