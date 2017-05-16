@@ -142,3 +142,15 @@ app = (
         </Form.Row>
     </Form>
 );
+
+/*
+ JavaScript 表达式
+ //属性表达式
+ 在属性值中用 JavaScript 表达式，应将其包裹在 {} 中：
+ let person = <Person name={window.isloggedIn ? window.name : ''} />;
+ person = React.createElement(
+ Person, {name: window.isloggedIn ? window.name : ''}
+ //布尔属性
+ 忽略的属性值将被 JSX 视为真
+);
+*/

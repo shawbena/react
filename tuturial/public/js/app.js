@@ -32,6 +32,7 @@ var Comment = React.createClass({
 
 var CommentList = React.createClass({
     render: function () {
+        //Array<ReactElement>
         var commentNodes = this.props.data.map(function (comment) {
             //返回的东西好奇怪
             return (
@@ -40,6 +41,7 @@ var CommentList = React.createClass({
                 </Comment>
             );
         });
+        //React.createElement(string/ReractClass type,[object props],[children ...]);
         return (
             <div className="comment-list">
                 {commentNodes}
