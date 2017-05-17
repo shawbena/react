@@ -41,7 +41,8 @@ var CommentList = React.createClass({
                 </Comment>
             );
         });
-        //React.createElement(string/ReractClass type,[object props],[children ...]);
+        //React.createElement(string/ReactClass type,[object props],[children ...]);
+        //type: html 标签字符串或 React/createClass 创建的 ReactClass
         return (
             <div className="comment-list">
                 {commentNodes}
