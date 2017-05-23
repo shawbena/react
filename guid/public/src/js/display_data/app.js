@@ -142,3 +142,46 @@ app = (
         </Form.Row>
     </Form>
 );
+
+/*
+ JavaScript 表达式
+ //属性表达式
+ 在属性值中使用 JavaScript 表达式要将表达式包括在 {} 中而不是用引号。
+ var person = <Person name="{window.isLoggedIn ? window.name : ''}">
+ var person = React.createElement(
+     Person,
+     {name: window.isLoggedIn ? window.name : ''}
+ );
+ //布尔属性
+ 忽略属性值会被 JSX 当做 true. 要传递 false 必须要用属性表达式。使用表单元素时经常会出现这种问题，如 disabled, require, checked 和 readOnly 这样的属性。
+ <input type="button" disabled />
+ <input type="button" disabled={true} />
+
+ <input type="button" />
+ <input type="button" disabled={false} />
+
+ // Child 表达式
+ 同样，JavaScript 表达式可用于表示 children:
+ //input(JSX)
+ var content = <Container>{window.isLoggedIn ? <Nav /> : <Login />}</Container>;
+ var content = React.createElement(
+     Container,
+     null,
+     window.isLoggedIn ? React.createElement(Nav) : React.createElement(Login)
+ );
+
+ //注释
+*/
+var content = (
+     <Nav>
+        {/* child comment, put {} around */}
+        <Person
+            /* multi
+            
+            line
+            comment
+            */
+            name={window.isLoggedIn ? window.name : ''} //end of line comment
+        />
+    </Nav>
+);
