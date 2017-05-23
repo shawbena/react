@@ -514,12 +514,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var type = Object.prototype.toString.call(obj);
         return type.replace(/(^\[object\s)(\w+)(\]$)/, '$2');
     }
-    
-    /**
-     * 字符串化输入
-     * @param {any} v
-     * @returns <String>
-     */
+
     function stringifyPrimitive(v) {
         switch (typeof v === "undefined" ? "undefined" : _typeof(v)) {
             case 'string':

@@ -146,6 +146,7 @@ app = (
 /*
  JavaScript 表达式
  //属性表达式
+<<<<<<< HEAD
  在属性值中使用 JavaScript 表达式要将表达式包括在 {} 中而不是用引号。
  var person = <Person name="{window.isLoggedIn ? window.name : ''}">
  var person = React.createElement(
@@ -185,3 +186,13 @@ var content = (
         />
     </Nav>
 );
+=======
+ 在属性值中用 JavaScript 表达式，应将其包裹在 {} 中：
+ let person = <Person name={window.isloggedIn ? window.name : ''} />;
+ person = React.createElement(
+ Person, {name: window.isloggedIn ? window.name : ''}
+ //布尔属性
+ 忽略的属性值将被 JSX 视为真
+);
+*/
+>>>>>>> 48781326df14a812f0014fba99ce1b48199ca5c7
