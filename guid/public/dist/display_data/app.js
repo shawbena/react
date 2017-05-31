@@ -88,3 +88,10 @@ app = React.createElement(
         React.createElement(Form.Input, null)
     )
 );
+
+var content = React.createElement(
+    Nav,
+    null,
+    React.createElement(Person, {
+        name: window.isLoggedIn ? window.name : '' })
+);

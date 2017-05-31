@@ -186,7 +186,7 @@ var content = (
         />
     </Nav>
 );
-=======
+/*
  在属性值中用 JavaScript 表达式，应将其包裹在 {} 中：
  let person = <Person name={window.isloggedIn ? window.name : ''} />;
  person = React.createElement(
@@ -195,4 +195,3 @@ var content = (
  忽略的属性值将被 JSX 视为真
 );
 */
->>>>>>> 48781326df14a812f0014fba99ce1b48199ca5c7
