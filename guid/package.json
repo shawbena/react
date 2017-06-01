@@ -25,7 +25,7 @@
     "gulp-babel": "^6.1.2"
   },
   "babel": {
-    "ignore": ["public/src/**/*.min.js"],
+    "ignore": ["public/src/*.min.js", "public/src/**/*.min.js", "public/src/react.js", "public/src/react-dom.js"],
     "comments": false,
     "minified": false,
     "presets": [
