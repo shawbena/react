@@ -79,3 +79,15 @@ let MyComponent = React.createClass({
         );
     }
 });
+
+/* Default Prop Values
+ 为 props 定义默认值
+ getDefaultProps() 的结果会缓存起来，如果该拥有组件没有指定值，那么结果将用于 this.props.value 的值。
+*/
+let ComponentWithDefaultProps = React.createClass({
+    getDefaultProps: function(){
+        return {
+            value: 'default value'
+        };
+    }
+});
