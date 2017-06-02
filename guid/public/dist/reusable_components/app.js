@@ -1,63 +1,75 @@
-'use strict';
+define([], function () {
+    'use strict';
 
-React.createClass({
-    propTypes: {
-        optionalArray: React.PropTypes.array,
-        optionalBool: React.PropTypes.bool,
-        optionalFunc: React.PropTypes.func,
-        optionalNumber: React.PropTypes.number,
-        optionalObject: React.PropTypes.object,
-        optionalString: React.PropTypes.string,
-        optionalSymbol: React.PropTypes.optionalSymbol,
+    React.createClass({
+        propTypes: {
+            optionalArray: React.PropTypes.array,
+            optionalBool: React.PropTypes.bool,
+            optionalFunc: React.PropTypes.func,
+            optionalNumber: React.PropTypes.number,
+            optionalObject: React.PropTypes.object,
+            optionalString: React.PropTypes.string,
+            optionalSymbol: React.PropTypes.optionalSymbol,
 
-        optionalNode: React.PropTypes.node,
+            optionalNode: React.PropTypes.node,
 
-        optionalElement: React.PropTypes.element,
+            optionalElement: React.PropTypes.element,
 
-        optionalMessage: React.PropTypes.instanceOf(Message),
+            optionalMessage: React.PropTypes.instanceOf(Message),
 
-        optionalEnum: React.PropTypes.oneOf(['News', 'Photos']),
+            optionalEnum: React.PropTypes.oneOf(['News', 'Photos']),
 
-        optionalUnion: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.instanceOf(Message)]),
+            optionalUnion: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.instanceOf(Message)]),
 
-        optionalArrayOf: React.PropTypes.arrayOf(React.ProTypes.number),
+            optionalArrayOf: React.PropTypes.arrayOf(React.ProTypes.number),
 
-        optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),
+            optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),
 
-        optionalObjectWithShape: React.PropTypes.shape({
-            color: React.PropTypes.string,
-            fontSize: React.PropTypes.number
-        }),
+            optionalObjectWithShape: React.PropTypes.shape({
+                color: React.PropTypes.string,
+                fontSize: React.PropTypes.number
+            }),
 
-        requiredFunc: React.PropTypes.func.isRequired,
+            requiredFunc: React.PropTypes.func.isRequired,
 
-        requiredAny: React.PropTypes.any.isRequired,
+            requiredAny: React.PropTypes.any.isRequired,
 
-        customProp: function customProp(props, propName, componentName) {
-            if (!/matchme/.test(props[propName])) {
-                return new Error('Invalid prop `' + propName + '` supplied to' + ' `' + componentName + '`. Validation failed');
-            }
+            customProp: function customProp(props, propName, componentName) {
+                if (!/matchme/.test(props[propName])) {
+                    return new Error('Invalid prop `' + propName + '` supplied to' + ' `' + componentName + '`. Validation failed');
+                }
+            },
+
+            customArrayProp: React.PropTypes.arrayOf(function (propValue, key, componentName, location, propFullName) {
+                if (!/matchme/.test(propValue[key])) {
+                    return new Error('Invalid prop `' + propFullName + '` supplied to' + ' `' + componentName + '`. Validation failed.');
+                }
+            })
+        }
+    });
+
+    var MyComponent = React.createClass({
+        displayName: 'MyComponent',
+
+        propTypes: {
+            children: React.PropTypes.element.isRequired
         },
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                this.props.children
+            );
+        }
+    });
 
-        customArrayProp: React.PropTypes.arrayOf(function (propValue, key, componentName, location, propFullName) {
-            if (!/matchme/.test(propValue[key])) {
-                return new Error('Invalid prop `' + propFullName + '` supplied to' + ' `' + componentName + '`. Validation failed.');
-            }
-        })
-    }
-});
+    var ComponentWithDefaultProps = React.createClass({
+        displayName: 'ComponentWithDefaultProps',
 
-var MyComponent = React.createClass({
-    displayName: 'MyComponent',
-
-    propTypes: {
-        children: React.PropTypes.element.isRequired
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            this.props.children
-        );
-    }
+        getDefaultProps: function getDefaultProps() {
+            return {
+                value: 'default value'
+            };
+        }
+    });
 });
