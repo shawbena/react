@@ -59,7 +59,9 @@ function ActionLink(){
     );
   }
 }
-//使用 arrow function (https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+//使用 arrow function 
+这种语法的问题是每次渲染 LogginButton 都会创建一个不同的回调，大多数情况下是没有问题的。然而，如果这个回调作为属性传递给下层的组件，这些组件可能要额外渲染。我们通常推荐在构造函数中绑定或使用 property initializer syntax, 避免这样的性能问题。
+(https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 class LoggingButton extends React.Component {
   handleClick() {
     console.log('this is:', this);
@@ -81,9 +83,12 @@ class Toggle extends React.Component{
         this.state = {isToggleOn: true};
         // This binding is necessary to make `this` work in the callback
         //React 中每个方法自动绑定 React 实例（ES6 class 语法除外）。//?
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
     }
-    handleClick(){
+    //property initializer syntax
+    //应该是绑定上下文的 this
+    handleClick = (e) =>{
+        console.log(e);
         this.setState(prevState => ({
             isToggleOn: !prevState.isToggleOn
         }));

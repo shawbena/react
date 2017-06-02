@@ -64,13 +64,18 @@ class Clock extends React.Component {
     }
     //组件挂载时，在组件输出已经渲染至 DOM 后运行
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 1000);
+        //此处必需要用 lambda 函数绑定上下文的 this
+        this.timerID = setInterval(() => {
+            this.tick();
+            console.log(this);
+        }, 1000);
+        
     }
     //组件卸载时, 拆除定时器
     componentWillUnmount() {
         clearInterval(this.timerID);
     }
-    tick(){
+    tick() {
         this.setState({
             date: new Date()
         });
@@ -131,7 +136,7 @@ ReactDOM.render(
 * 如果你把组件树想像为 props 的瀑布流，每个组件的状态就像一个额外的水源在任意节点汇入但是是向下流动的。
 * 所有的组件都是完全孤立的，请看 <App> 组件
 */
-function FormattedDate(props){
+function FormattedDate(props) {
     return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
 }
 // <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
@@ -143,7 +148,7 @@ ReactDOM.render(
  每个 Clock 建立自己的计时器，并独立更新。
  在 React 应用中，无论一个组件是有状态的还是无状态的都被视为组件的实现细节，可能会随时间变化。你可以在无状态的组件中使用有状态的组件，反过来也可以。
 */
-function App(){
+function App() {
     return (
         <div>
             <Clock />

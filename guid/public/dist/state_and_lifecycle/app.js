@@ -84,7 +84,8 @@ var Clock = function (_React$Component) {
             var _this2 = this;
 
             this.timerID = setInterval(function () {
-                return _this2.tick();
+                _this2.tick();
+                console.log(_this2);
             }, 1000);
         }
     }, {
