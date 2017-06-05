@@ -24,7 +24,8 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2"
+    "gulp-babel": "^6.1.2",
+    "gulp-ruby-sass": "^2.1.1"
   },
   "babel": {
     "ignore": [

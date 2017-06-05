@@ -1,6 +1,11 @@
-import React from '../react'
-import ReactDOM from '../react-dom'
-import WarningButton from './WarningButton'
+import React from '../react';
+import ReactDOM from '../react-dom';
+import WarningButton from './WarningButton';
+import { Pop, NewRolePop } from './Pop';
+import Greeting from './Greeting';
+import MyComponent from './MyComponent';
+import {MyContainer, MyFirstComponent, MySecondComponent} from './MyContainer';
+import MixedComponent from './MixedComponent';
 
 /*
  # JSX in depth
@@ -20,10 +25,36 @@ import WarningButton from './WarningButton'
 */
 
 class App extends React.Component {
+    showPopHandler = () => {
+        ReactDOM.render(
+            <Pop id="new_role_pop" title="新建角色" childPop={NewRolePop} />,
+            document.getElementById('pop')
+        );
+    }
     render() {
         return (
             <div>
                 <WarningButton />
+                <div>
+                    <button onClick={this.showPopHandler}>显示弹窗</button>
+                </div>
+                <MyTextBox autocomplete />
+                <App1 />
+                <App2 />
+                <MyComponent>Hello world!</MyComponent>
+                <MyComponent>
+                    <div>
+                        This is valid HTML &amp; JSX at the same time.
+                    </div>
+                </MyComponent>
+                <SameDiv />
+                <MyContainer>
+                    <MyFirstComponent />
+                    <MySecondComponent />
+                </MyContainer>
+                <MixedComponent>
+                    aaaaaa
+                </MixedComponent>
             </div>
         );
     }
@@ -62,16 +93,138 @@ let div = <div className="sidebar" />
  由于 JSX 编译成了 React.createElement 调用，React 库必须总是在你的 JSX 代码的作用域内。
 */
 
+/*
+ # Using Dot Notation for JSX Type
+ 见 MyComponents.js
+*/
+
+/*
+ # 用户定义的组件必须要大写（capitalized (开头大写吗)）
+*/
+
+//...
+
+/*
+ # Choosing the Type at Runtime
+ 你可以使用常规表达式做为 React element type. 如果你真想用一个常规表达式指出元素的类型，首先将他赋值给一个大写的变量。这经常是你想基于一个 prop 渲染一个不同的组件：
+
+*/
+/*
+ # Props in JSX
+ # JavaScript Expression as 
+ # String Literals
+ # props 默认为 ture 的 props
+ 如果你不给 prop 传值，他默认为 true. 下面两个 JSX 表达式是等价的：
+    <MyTextBox autocomplete />
+    <MyTextBox autocomplete={true} />
+ [ES6 object shorthand] (https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015) 中 {foo} 是 {foo: foo} 而非 {foo: true} 的简写。这里这样写是因为匹配了 HTMl 的行为，注意这一点。
+*/
+function MyTextBox(props) {
+    return (
+        <div className="my-text-box">
+            <input type="text" autoComplete={props.autocomplete} />
+        </div>
+    );
+}
+
+/*
+# Props in JSX
+ # Spread Attributes
+ 如果已经有一个 `props` 对象，并且你想让他在 JSX 中传递，你可以用 ... 作为 "spread" 操作符以传递整个 props 对象。以下两个组件是相等的：
+*/
+
+function App1() {
+    return <Greeting firstName="Ben" lastName="Hector" />;
+}
+
+function App2() {
+    const propps = { firstName: 'Ben', lastName: 'Hector' };
+    return <Greeting {...propps} />;
+}
+/*
+ 如果你要构建泛型的空中使用 Spread Attributes 很有用。然而，这样可能也会传递一些不相关的属性。我们建议你少使用这种语法。
+*/
+
+/*
+ # Children in JSX
+ 在既有开标签又有闭合标签的，标签间的内容作为一个特殊属性传递：`props.children`. 有几种不同的方式传递 children：
+ # String Literals
+ # JSX Children
+ # JavaScript Expression as Children
+ # Function as Children
+ # Booleans, Null, and Undefined Are Ignored
+*/
+
+/*
+ # String Literals
+ 你可以在开和闭合标签间放一个字符串，`props.children` 将会是那这字符串。对于很多内置的 HTML 元素这样很有用。如：
+
+  <MyComponent>Hello world!</MyComponent>
+ 
+ 这是有效的 JSX, `MyComponent` 中的 `props.chidren` 将会是字符串 "Hello world!". HTML 没有转义，所以你可以像写 HTML 一样写 JSX：
+  
+   <div>This is valid HTML &amp; JSX at the same time</div>
+
+ JSX 移除了行开头和结尾的空白符。也移除了空行。临近标签的新行也被移除；字符串字面量间的新行被压缩为一个空格。所以这些渲染的是一样的：
+*/
+function SameDiv() {
+    return (
+        <div className="same-div">
+            <div>Hello World</div>
+            <div>
+                Hello World
+            </div>
+            <div>
+                Hello
+                World
+            </div>
+            <div>
 
 
+                Hello World
+            </div>
+        </div>
+    );
+}
 
+/*
+ # JSX Children
+ 你可以提供更多 JSX 元素做为 children. 这非常有用于展示嵌套的组件：
+  
+  <MyContainer>
+      <MyFirstComponent />
+      <MyFirstComponent />
+  </MyContainer>
+ 
+ 你可以混合使用不同类型的 children, 你可以将字符串字面量和 JSX children 一起使用。JSX 的这一点类似 HTML，所以这是有效的 JSX 也是有效的 HTML:
+  
+   <div>
+       Here is a list:
+       <ul>
+           <li>Item 1</li>
+           <li>Item 2</li>
+       </ul>
+   </div>
 
+  一个 React 组件不能返回多个 React 元素，但一个 JSX 表达式可以有多个子元素，所以如果你想用一个组件渲染多个东西，你可以像上面一样把他包裹在一个 div 中。 
+*/
 
+/*
+ # JavaScript Expression as Children
+ */ 
+/*
+ # Functions as Children
+*/
 
-
-
-
-
-
-
+/*
+ # Booleans, Null, and Undefined Are Ignored
+ `false`, `null`, `undefined` 和 `true` 是有效的 children. 只是不渲染而已。以下的 JSX 表达式渲染的是一样的：
+  
+  <div />
+  <div></div>
+  <div>{false}</div>
+  <div>{null}</div>
+  <div>{undefined}</div>
+  <div>{true}</div> 
+*/
 export default App;

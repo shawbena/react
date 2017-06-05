@@ -1,4 +1,4 @@
-define(['exports', '../react', '../react-dom', './WarningButton'], function (exports, _react, _reactDom, _WarningButton) {
+define(['exports', '../react', '../react-dom', './WarningButton', './Pop', './Greeting', './MyComponent', './MyContainer', './MixedComponent'], function (exports, _react, _reactDom, _WarningButton, _Pop, _Greeting, _MyComponent, _MyContainer, _MixedComponent) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -10,6 +10,12 @@ define(['exports', '../react', '../react-dom', './WarningButton'], function (exp
     var _reactDom2 = _interopRequireDefault(_reactDom);
 
     var _WarningButton2 = _interopRequireDefault(_WarningButton);
+
+    var _Greeting2 = _interopRequireDefault(_Greeting);
+
+    var _MyComponent2 = _interopRequireDefault(_MyComponent);
+
+    var _MixedComponent2 = _interopRequireDefault(_MixedComponent);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -69,9 +75,19 @@ define(['exports', '../react', '../react-dom', './WarningButton'], function (exp
         _inherits(App, _React$Component);
 
         function App() {
+            var _ref;
+
+            var _temp, _this, _ret;
+
             _classCallCheck(this, App);
 
-            return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key];
+            }
+
+            return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.showPopHandler = function () {
+                _reactDom2.default.render(_react2.default.createElement(_Pop.Pop, { id: 'new_role_pop', title: '\u65B0\u5EFA\u89D2\u8272', childPop: _Pop.NewRolePop }), document.getElementById('pop'));
+            }, _temp), _possibleConstructorReturn(_this, _ret);
         }
 
         _createClass(App, [{
@@ -80,7 +96,45 @@ define(['exports', '../react', '../react-dom', './WarningButton'], function (exp
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_WarningButton2.default, null)
+                    _react2.default.createElement(_WarningButton2.default, null),
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: this.showPopHandler },
+                            '\u663E\u793A\u5F39\u7A97'
+                        )
+                    ),
+                    _react2.default.createElement(MyTextBox, { autocomplete: true }),
+                    _react2.default.createElement(App1, null),
+                    _react2.default.createElement(App2, null),
+                    _react2.default.createElement(
+                        _MyComponent2.default,
+                        null,
+                        'Hello world!'
+                    ),
+                    _react2.default.createElement(
+                        _MyComponent2.default,
+                        null,
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'This is valid HTML & JSX at the same time.'
+                        )
+                    ),
+                    _react2.default.createElement(SameDiv, null),
+                    _react2.default.createElement(
+                        _MyContainer.MyContainer,
+                        null,
+                        _react2.default.createElement(_MyContainer.MyFirstComponent, null),
+                        _react2.default.createElement(_MyContainer.MySecondComponent, null)
+                    ),
+                    _react2.default.createElement(
+                        _MixedComponent2.default,
+                        null,
+                        'aaaaaa'
+                    )
                 );
             }
         }]);
@@ -107,5 +161,50 @@ define(['exports', '../react', '../react-dom', './WarningButton'], function (exp
     function formatName() {}
 
     var div = _react2.default.createElement('div', { className: 'sidebar' });
+
+    function MyTextBox(props) {
+        return _react2.default.createElement(
+            'div',
+            { className: 'my-text-box' },
+            _react2.default.createElement('input', { type: 'text', autoComplete: props.autocomplete })
+        );
+    }
+
+    function App1() {
+        return _react2.default.createElement(_Greeting2.default, { firstName: 'Ben', lastName: 'Hector' });
+    }
+
+    function App2() {
+        var propps = { firstName: 'Ben', lastName: 'Hector' };
+        return _react2.default.createElement(_Greeting2.default, propps);
+    }
+
+    function SameDiv() {
+        return _react2.default.createElement(
+            'div',
+            { className: 'same-div' },
+            _react2.default.createElement(
+                'div',
+                null,
+                'Hello World'
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                'Hello World'
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                'Hello World'
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                'Hello World'
+            )
+        );
+    }
+
     exports.default = App;
 });
