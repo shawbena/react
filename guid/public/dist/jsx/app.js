@@ -1,4 +1,4 @@
-define(['exports', '../react', '../react-dom', './WarningButton', './Pop', './Greeting', './MyComponent', './MyContainer', './MixedComponent'], function (exports, _react, _reactDom, _WarningButton, _Pop, _Greeting, _MyComponent, _MyContainer, _MixedComponent) {
+define(['exports', '../react', '../react-dom', './WarningButton', './Pop', './Greeting', './MyComponent', './MyContainer', './MixedComponent', './ListThings'], function (exports, _react, _reactDom, _WarningButton, _Pop, _Greeting, _MyComponent, _MyContainer, _MixedComponent, _ListThings) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -134,7 +134,8 @@ define(['exports', '../react', '../react-dom', './WarningButton', './Pop', './Gr
                         _MixedComponent2.default,
                         null,
                         'aaaaaa'
-                    )
+                    ),
+                    _react2.default.createElement(_ListThings.ListOfTenThings, null)
                 );
             }
         }]);

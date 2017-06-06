@@ -49,16 +49,18 @@ class NewRolePop extends React.Component{
     }
     //创建角色
     createRoleHandler = (e) =>{
-        this.setState({roleName: 'new role name'}); //not ok
+        let roleName = 'new role name';
+        let _this = this;
+        this.setState({roleName});
         Utli.ajax({
             method: 'post',
             url: '/role/newRole',
             data: {
-                roleName: this.state.roleName
+                roleName
             }
         }, function(res){
             Utli.popo(res.msg);
-            this.props.closePopFun();
+            _this.props.closePopFun();
             console.log('创建了一个新角色！');
         });
     }

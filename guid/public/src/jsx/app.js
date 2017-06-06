@@ -6,6 +6,7 @@ import Greeting from './Greeting';
 import MyComponent from './MyComponent';
 import {MyContainer, MyFirstComponent, MySecondComponent} from './MyContainer';
 import MixedComponent from './MixedComponent';
+import {ListOfTenThings} from './ListThings';
 
 /*
  # JSX in depth
@@ -55,6 +56,7 @@ class App extends React.Component {
                 <MixedComponent>
                     aaaaaa
                 </MixedComponent>
+                <ListOfTenThings />
             </div>
         );
     }
@@ -111,7 +113,7 @@ let div = <div className="sidebar" />
 */
 /*
  # Props in JSX
- # JavaScript Expression as 
+ # JavaScript Expression as Props
  # String Literals
  # props 默认为 ture 的 props
  如果你不给 prop 传值，他默认为 true. 下面两个 JSX 表达式是等价的：
@@ -211,9 +213,37 @@ function SameDiv() {
 
 /*
  # JavaScript Expression as Children
+ 你可以传递任何 JavaScript 表达式作为 children, 将其包裹在 `{}` 中。如下面的表达式是等价的：
+
+     <MyComponent></MyComponent>
+     <MyComponent></MyComponent>
+
+ 当渲染任意长度的 JSX 表达式列表时很有用。如下渲染一个 HTMl 列表：
+
+     function Item(props){
+         return <li>{props.message}</li>
+     }
+
+     function TodoList(){
+         const todos = ['finish doc', 'submit pr', 'nag dan to review'];
+         return (
+             <ul>
+                {todos.map((message) => <Item key={message} message={}message />)}
+             </ul>
+         );
+     }
+
+ JavaScript 表达式可以和其他类型的 children 混用。这经常有用于替代字符中模板：
+      
+      function Hello(props){
+          return <div>Hello {props.addressee}</div>;
+      }
  */ 
 /*
  # Functions as Children
+ 通常，插入 JSX 的 JavaScript 表达式将评估为字符串，一个 React 元素，或者一个列表的这样的元素。
+    <ListOfTenThings />
+ 传递给自定义组件的 children 可以是任何东西，只要在渲染前组件把他们转换成 React 可理解的就可以。这种用途并不觉，但是他可以工作如果你想延伸下 JSX。
 */
 
 /*
@@ -226,5 +256,28 @@ function SameDiv() {
   <div>{null}</div>
   <div>{undefined}</div>
   <div>{true}</div> 
+
+  这有用于有条件渲染 React 元素。这个 JSX 仅当 showHeader 为 true 时渲染一个 <Header />:
+
+      <div>
+          {showHeader && <Header>}
+          <Content />
+      </div>
+
+ 注意 `false` 值，如一个 0 数组，仍然会被 React 渲染。例如，这段代码的执行结果不会如你所愿，因为当 props.message 是一个空数组时将会打印 0：
+
+     <div>
+         {props.messages.length && <MessageList messages={props.messages} />}
+     </div>
+ 
+ 相反，如果像 `false`, `true`, `null` 或 `undefined` 这样的值如果你想让他出现在输出中，你要把先把他转换 (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion) 成字符串：
+
+     <div>
+         My JavaScript variable is {String(myVariable)};
+     </div>
+ 
+*/
+/*
+ # end
 */
 export default App;

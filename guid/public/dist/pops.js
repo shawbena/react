@@ -1,10 +1,10 @@
-define(['exports', '../react', '../utli'], function (exports, _react, _utli) {
+define(['exports', 'react', 'utli'], function (exports, _react, _utli) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.NewRolePop = exports.Pop = undefined;
+    exports.NewRolePop = undefined;
 
     var _react2 = _interopRequireDefault(_react);
 
@@ -64,62 +64,17 @@ define(['exports', '../react', '../utli'], function (exports, _react, _utli) {
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
-    var Pop = function (_React$Component) {
-        _inherits(Pop, _React$Component);
-
-        function Pop(props) {
-            _classCallCheck(this, Pop);
-
-            var _this2 = _possibleConstructorReturn(this, (Pop.__proto__ || Object.getPrototypeOf(Pop)).call(this, props));
-
-            _this2.closePopHandler = function (e) {
-                console.log('pop-closed');
-            };
-
-            return _this2;
-        }
-
-        _createClass(Pop, [{
-            key: 'render',
-            value: function render() {
-                var ChildPop = this.props.childPop;
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'pop-box' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'pop-box-child', id: this.props.id },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'pop-box-title-bar' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'pop-box-title' },
-                                this.props.title
-                            ),
-                            _react2.default.createElement('div', { className: 'pop-box-close-icon', onClick: this.closePopHandler })
-                        ),
-                        _react2.default.createElement(ChildPop, { closePopFun: this.closePopHandler })
-                    )
-                );
-            }
-        }]);
-
-        return Pop;
-    }(_react2.default.Component);
-
-    var NewRolePop = function (_React$Component2) {
-        _inherits(NewRolePop, _React$Component2);
+    var NewRolePop = function (_React$Component) {
+        _inherits(NewRolePop, _React$Component);
 
         function NewRolePop(props) {
             _classCallCheck(this, NewRolePop);
 
-            var _this3 = _possibleConstructorReturn(this, (NewRolePop.__proto__ || Object.getPrototypeOf(NewRolePop)).call(this, props));
+            var _this2 = _possibleConstructorReturn(this, (NewRolePop.__proto__ || Object.getPrototypeOf(NewRolePop)).call(this, props));
 
-            _this3.createRoleHandler = function (e) {
-                var roleName = 'new role name';
-                var _this = _this3;
-                _this3.setState({ roleName: roleName });
+            _this2.createNewRole = function (e) {
+                var roleName = 'new rolename';
+                var _this = _this2;
                 _utli2.default.ajax({
                     method: 'post',
                     url: '/role/newRole',
@@ -128,13 +83,20 @@ define(['exports', '../react', '../utli'], function (exports, _react, _utli) {
                     }
                 }, function (res) {
                     _utli2.default.popo(res.msg);
-                    _this.props.closePopFun();
                     console.log('创建了一个新角色！');
+                    _this.canclePop();
+                    _this.props.newRoleCreated({
+                        roleName: roleName
+                    });
                 });
             };
 
-            _this3.state = { roleName: '' };
-            return _this3;
+            _this2.canclePop = function () {
+                console.log('关闭新建角色弹窗');
+            };
+
+            _this2.state = {};
+            return _this2;
         }
 
         _createClass(NewRolePop, [{
@@ -142,20 +104,37 @@ define(['exports', '../react', '../utli'], function (exports, _react, _utli) {
             value: function render() {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'pop-box-content' },
-                    _react2.default.createElement('div', null),
+                    { className: 'pop-box' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'buttons' },
+                        { className: 'pop-box-child' },
                         _react2.default.createElement(
-                            'button',
-                            { onClick: this.createRoleHandler },
-                            '\u521B\u5EFA'
+                            'div',
+                            { className: 'pop-box-title-bar' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'pop-box-title' },
+                                '\u65B0\u5EFA\u89D2\u8272'
+                            ),
+                            _react2.default.createElement('div', { className: 'pop-box-close-icon', onClick: this.canclePop })
                         ),
                         _react2.default.createElement(
-                            'button',
-                            { onClick: this.props.closePopFun },
-                            '\u53D6\u6D88'
+                            'div',
+                            { className: 'pop-box-content' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'buttons' },
+                                _react2.default.createElement(
+                                    'button',
+                                    { onClick: this.createNewRole },
+                                    '\u521B\u5EFA'
+                                ),
+                                _react2.default.createElement(
+                                    'button',
+                                    { onClick: this.canclePop },
+                                    '\u53D6\u6D88'
+                                )
+                            )
                         )
                     )
                 );
@@ -165,6 +144,5 @@ define(['exports', '../react', '../utli'], function (exports, _react, _utli) {
         return NewRolePop;
     }(_react2.default.Component);
 
-    exports.Pop = Pop;
     exports.NewRolePop = NewRolePop;
 });
