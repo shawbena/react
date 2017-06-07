@@ -1,5 +1,25 @@
-define([], function () {
+define(['exports', '../react', './nameForm', './eassyForm', './flavorForm', './reservation'], function (exports, _react, _nameForm, _eassyForm, _flavorForm, _reservation) {
   'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _react2 = _interopRequireDefault(_react);
+
+  var _nameForm2 = _interopRequireDefault(_nameForm);
+
+  var _eassyForm2 = _interopRequireDefault(_eassyForm);
+
+  var _flavorForm2 = _interopRequireDefault(_flavorForm);
+
+  var _reservation2 = _interopRequireDefault(_reservation);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -49,53 +69,34 @@ define([], function () {
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  function ActionLink() {
-    return React.createElement(
-      'a',
-      { href: '#', onClick: handleClick },
-      'Click'
-    );
+  var App = function (_React$Component) {
+    _inherits(App, _React$Component);
 
-    function handleClick(e) {
-      e.preventDefault();
-      console.log('The link was clicked.');
-    }
-  }
+    function App(props) {
+      _classCallCheck(this, App);
 
-  var Toggle = function (_React$Component) {
-    _inherits(Toggle, _React$Component);
+      var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    function Toggle(props) {
-      _classCallCheck(this, Toggle);
-
-      var _this = _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).call(this, props));
-
-      _this.handleClick = function (e) {
-        console.log(e);
-        _this.setState(function (prevState) {
-          return {
-            isToggleOn: !prevState.isToggleOn
-          };
-        });
-      };
-
-      _this.state = { isToggleOn: true };
+      _this.state = {};
       return _this;
     }
 
-    _createClass(Toggle, [{
+    _createClass(App, [{
       key: 'render',
       value: function render() {
-        return React.createElement(
-          'button',
-          { onClick: this.handleClick },
-          this.state.isToggleOn ? 'ON' : 'OFF'
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_nameForm2.default, null),
+          _react2.default.createElement(_eassyForm2.default, null),
+          _react2.default.createElement(_flavorForm2.default, null),
+          _react2.default.createElement(_reservation2.default, null)
         );
       }
     }]);
 
-    return Toggle;
-  }(React.Component);
+    return App;
+  }(_react2.default.Component);
 
-  ReactDOM.render(React.createElement(Toggle, null), document.getElementById('app'));
+  exports.default = App;
 });

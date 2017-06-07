@@ -17,5 +17,5 @@ gulp.task('sass', () => {
 
 //default task
 gulp.task('default', ['es5-jsx', 'sass'], function(){
-    console.log('tasks completed...');     
+    
 });
