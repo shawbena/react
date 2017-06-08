@@ -1,15 +1,11 @@
-define(['exports', '../react', '../react-router-dom', './home', './newsFeed'], function (exports, _react, _reactRouterDom, _home, _newsFeed) {
-    'use strict';
+define(["exports", "../react"], function (exports, _react) {
+    "use strict";
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
 
     var _react2 = _interopRequireDefault(_react);
-
-    var _home2 = _interopRequireDefault(_home);
-
-    var _newsFeed2 = _interopRequireDefault(_newsFeed);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -65,36 +61,31 @@ define(['exports', '../react', '../react-router-dom', './home', './newsFeed'], f
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
-    var App = function (_React$Component) {
-        _inherits(App, _React$Component);
+    var NewsFeed = function (_React$Component) {
+        _inherits(NewsFeed, _React$Component);
 
-        function App(props) {
-            _classCallCheck(this, App);
+        function NewsFeed(props) {
+            _classCallCheck(this, NewsFeed);
 
-            var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+            var _this = _possibleConstructorReturn(this, (NewsFeed.__proto__ || Object.getPrototypeOf(NewsFeed)).call(this, props));
 
             _this.state = {};
             return _this;
         }
 
-        _createClass(App, [{
-            key: 'render',
+        _createClass(NewsFeed, [{
+            key: "render",
             value: function render() {
                 return _react2.default.createElement(
-                    _reactRouterDom.BrowserRouter,
-                    null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(_reactRouterDom.Route, { exat: true, path: '/', component: _home2.default }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/news', component: _newsFeed2.default })
-                    )
+                    "div",
+                    { className: "news-feed" },
+                    "News Feed"
                 );
             }
         }]);
 
-        return App;
+        return NewsFeed;
     }(_react2.default.Component);
 
-    exports.default = App;
+    exports.default = NewsFeed;
 });

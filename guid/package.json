@@ -36,7 +36,8 @@
       "public/src/require.js",
       "public/src/main.js",
       "public/src/react-router.js",
-      "public/src/history.js"
+      "public/src/history.js",
+      "public/src/react-router-dom.js"
     ],
     "comments": false,
     "minified": false,
