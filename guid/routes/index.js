@@ -14,4 +14,12 @@ router.post('/role/newRole', function(req, res, next){
     data: req.body
   });
 });
+
+//配合前端路由
+router.get('/home', function(req, res, next){
+  res.send('homepage');
+});
+router.get('/news', function(req, res, next){
+  res.send('news');
+});
 module.exports = router;

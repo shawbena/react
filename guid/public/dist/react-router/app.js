@@ -86,7 +86,7 @@ define(['exports', '../react', '../react-router-dom', './home', './newsFeed'], f
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, strict: true, path: '/home', component: _home2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, strict: true, path: '/', component: _home2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, strict: true, path: '/news', component: _newsFeed2.default })
           )
         );
