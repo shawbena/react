@@ -1,5 +1,17 @@
-define([], function () {
-    'use strict';
+define(["exports", "../react"], function (exports, _react) {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+
+    var _react2 = _interopRequireDefault(_react);
+
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {
+            default: obj
+        };
+    }
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -49,53 +61,48 @@ define([], function () {
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
-    function ActionLink() {
-        return React.createElement(
-            'a',
-            { href: '#', onClick: handleClick },
-            'Click'
-        );
+    var Nav = function (_React$Component) {
+        _inherits(Nav, _React$Component);
 
-        function handleClick(e) {
-            e.preventDefault();
-            console.log('The link was clicked.');
-        }
-    }
+        function Nav(props) {
+            _classCallCheck(this, Nav);
 
-    var Toggle = function (_React$Component) {
-        _inherits(Toggle, _React$Component);
+            var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
 
-        function Toggle(props) {
-            _classCallCheck(this, Toggle);
-
-            var _this = _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).call(this, props));
-
-            _this.handleClick = function (e) {
-                console.log(e);
-                _this.setState(function (prevState) {
-                    return {
-                        isToggleOn: !prevState.isToggleOn
-                    };
-                });
-            };
-
-            _this.state = { isToggleOn: true };
+            _this.state = {};
             return _this;
         }
 
-        _createClass(Toggle, [{
-            key: 'render',
+        _createClass(Nav, [{
+            key: "render",
             value: function render() {
-                return React.createElement(
-                    'button',
-                    { onClick: this.handleClick },
-                    this.state.isToggleOn ? 'ON' : 'OFF'
+                return _react2.default.createElement(
+                    "ul",
+                    { id: "nav" },
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#/home" },
+                            "Home"
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#/news" },
+                            "News"
+                        )
+                    )
                 );
             }
         }]);
 
-        return Toggle;
-    }(React.Component);
+        return Nav;
+    }(_react2.default.Component);
 
-    ReactDOM.render(React.createElement(Toggle, null), document.getElementById('app'));
+    exports.default = Nav;
 });

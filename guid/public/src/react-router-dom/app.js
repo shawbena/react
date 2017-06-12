@@ -41,5 +41,13 @@
      <BroserRouter getUserConfirmation={getConfirmation} />
 
  # froceRefresh: bool
- 
+ 如果是 `true`, 当页面导航时路由器将使用整个页面刷新。你可能只想在不支持 HTML5 history API 的流览器中使用这个功能。
+
+     const supportsHistory = 'pushState' in window.history;
+     <BrowserRouter forceRefresh={!supportsHistory} />
+
+ # keyLength: number
+ `location.key` 的长度。默认为6.
+
+      <BroserRouter keyLength={12}>
 */

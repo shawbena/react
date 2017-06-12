@@ -20,6 +20,6 @@ router.get('/home', function(req, res, next){
   res.send('homepage');
 });
 router.get('/news', function(req, res, next){
-  res.send('news');
+  res.send('homepage');
 });
 module.exports = router;
