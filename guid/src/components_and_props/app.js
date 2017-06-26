@@ -6,7 +6,7 @@
 /*
  # 功能和组件
  定义组件的最简单方式是写一个 JavaScript 函数：
- 这是一个有效的 React 组件，因为他接收一个单一的 "props" 对象参数并返回一个 React 元素。我们称这样的组件 "functional" 因为他们是字面量上地 JavaScript 函数。
+ 这是一个有效的 React 组件，因为他接收一个单一的 "props" 对象参数并返回一个 React 元素。我们称这样的组件 "functional" 因为他们是字面量上的 JavaScript 函数。
 */
 function Welcome(props) {
     return <h1>Hello, {props.name}</h1>;

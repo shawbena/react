@@ -80,7 +80,16 @@ define(["exports", "../react"], function (exports, _react) {
                 return _react2.default.createElement(
                     "div",
                     { className: "home" },
-                    "home"
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        "home"
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        this.props.children
+                    )
                 );
             }
         }]);

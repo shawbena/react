@@ -1,11 +1,14 @@
-define(['exports', '../react', '../react-router-dom', '../history', './home', './newsFeed', './nav'], function (exports, _react, _reactRouterDom, _history, _home, _newsFeed, _nav) {
+define(['exports', '../react', '../react-dom', '../react-router-dom', '../history', './home', './newsFeed', './nav'], function (exports, _react, _reactDom, _reactRouterDom, _history, _home, _newsFeed, _nav) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
+    exports.bootstrap = undefined;
 
     var _react2 = _interopRequireDefault(_react);
+
+    var _reactDom2 = _interopRequireDefault(_reactDom);
 
     var _home2 = _interopRequireDefault(_home);
 
@@ -68,6 +71,20 @@ define(['exports', '../react', '../react-router-dom', '../history', './home', '.
     }
 
     var history = (0, _history.createHashHistory)();
+    function About(props) {
+        return _react2.default.createElement(
+            'div',
+            { id: 'about' },
+            'About Page'
+        );
+    }
+    function Inbox(props) {
+        return _react2.default.createElement(
+            'div',
+            { id: 'inbox' },
+            'Inbox Page'
+        );
+    }
 
     var App = function (_React$Component) {
         _inherits(App, _React$Component);
@@ -91,7 +108,12 @@ define(['exports', '../react', '../react-router-dom', '../history', './home', '.
                         'div',
                         { className: 'react-root' },
                         _react2.default.createElement(_reactRouterDom.Route, { component: _nav2.default }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _home2.default }),
+                        _react2.default.createElement(
+                            _reactRouterDom.Route,
+                            { path: '/', component: _home2.default },
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: About }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/inbox', component: Inbox })
+                        ),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/news', component: _newsFeed2.default })
                     )
                 );
@@ -101,5 +123,8 @@ define(['exports', '../react', '../react-router-dom', '../history', './home', '.
         return App;
     }(_react2.default.Component);
 
-    exports.default = App;
+    function bootstrap() {
+        _reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
+    }
+    exports.bootstrap = bootstrap;
 });

@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var fs = require('fs');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -9,6 +10,15 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+//页面路由
+const pageRoutes = [
+    '/',
+    '/info',
+    '/info/message',
+    '/order',
+    '/flow'
+];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,13 +32,34 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 app.use('/', index);
 app.use('/users', users);
 
+app.use(function (req, res, next) {
+    let reqUrl = req.originalUrl;
+    console.log(reqUrl);
+    if (pageRoutes.indexOf(reqUrl) >= 0) {
+        fs.readFile(path.resolve(__dirname, 'index.html'), function (err, data) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+            } else {
+                res.writeHead(200, {
+                    'Content-type': 'text/html',
+                    'Connection':'keep-alive'
+                });
+                res.end(data);
+            }
+        });
+    }else{
+        app.use('/', index);
+        app.use('/users', users);
+    }
+});
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
 
     err.status = 404;
@@ -36,7 +67,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -45,6 +76,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
 var a = 2;
 
 a += 1;

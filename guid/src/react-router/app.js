@@ -1,12 +1,24 @@
 import React from '../react';
-import {HashRouter as Router, Route} from '../react-router-dom';
-import {createHashHistory} from '../history';
+import ReactDOM from '../react-dom';
+import { HashRouter as Router, Route } from '../react-router-dom';
+import { createHashHistory } from '../history';
 import Home from './home';
 import NewsFeed from './newsFeed';
 import Nav from './nav';
 
 let history = createHashHistory();
-export default class App extends React.Component {
+function About(props) {
+    return (
+        <div id="about">About Page</div>
+    );
+}
+function Inbox(props) {
+    return (
+        <div id="inbox">Inbox Page</div>
+    );
+}
+
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -15,15 +27,25 @@ export default class App extends React.Component {
         return (
             <Router history={history}>
                 <div className="react-root">
-                    <Route component={Nav}/>
-                    <Route path="/home" component={Home}/>
-                    <Route path="/news" component={NewsFeed}/>
+                    <Route component={Nav} />
+                    <Route path="/" component={Home}>
+                        <Route path="/about" component={About} />
+                        <Route path="/inbox" component={Inbox} />
+                    </Route>
+                    <Route path="/news" component={NewsFeed} />
                 </div>
             </Router>
         );
     }
 }
 
+function bootstrap() {
+    ReactDOM.render(
+        <App />,
+        document.querySelector('#app')
+    );
+}
+export { bootstrap };
 /*
  # <Router>
  用于所有路由组件的通用低级路由接口，通常应用会使用下面的高级路由：

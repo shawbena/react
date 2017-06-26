@@ -84,8 +84,26 @@ define(["exports", "../react"], function (exports, _react) {
                         null,
                         _react2.default.createElement(
                             "a",
-                            { href: "#/home" },
+                            { href: "#/" },
                             "Home"
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#/about" },
+                            "About"
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#/inbox" },
+                            "Inbox"
                         )
                     ),
                     _react2.default.createElement(

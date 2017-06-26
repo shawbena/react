@@ -8,7 +8,12 @@ export default class Home extends React.Component{
     render(){
         let props = this.props;
         return (
-            <div className="home">home</div>
+            <div className="home">
+                <div>home</div>
+                <div>
+                    {this.props.children}
+                </div>
+            </div>
         );
     }
 }
