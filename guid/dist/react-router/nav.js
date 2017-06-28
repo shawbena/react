@@ -84,8 +84,8 @@ define(["exports", "../react"], function (exports, _react) {
                         null,
                         _react2.default.createElement(
                             "a",
-                            { href: "#/" },
-                            "Home"
+                            { href: "/info" },
+                            "Info"
                         )
                     ),
                     _react2.default.createElement(
@@ -93,8 +93,8 @@ define(["exports", "../react"], function (exports, _react) {
                         null,
                         _react2.default.createElement(
                             "a",
-                            { href: "#/about" },
-                            "About"
+                            { href: "/order" },
+                            "Order"
                         )
                     ),
                     _react2.default.createElement(
@@ -102,8 +102,8 @@ define(["exports", "../react"], function (exports, _react) {
                         null,
                         _react2.default.createElement(
                             "a",
-                            { href: "#/inbox" },
-                            "Inbox"
+                            { href: "/flow" },
+                            "Flow"
                         )
                     ),
                     _react2.default.createElement(
@@ -111,8 +111,8 @@ define(["exports", "../react"], function (exports, _react) {
                         null,
                         _react2.default.createElement(
                             "a",
-                            { href: "#/news" },
-                            "News"
+                            { href: "/alarm" },
+                            "Alarm"
                         )
                     )
                 );

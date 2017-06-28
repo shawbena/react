@@ -2,20 +2,20 @@ let gulp = require('gulp');
 let babel = require('gulp-babel');
 let sass = require('gulp-ruby-sass');
 
-//es6 + jsx -> es5
-gulp.task('es5-jsx', function(){
-    return gulp.src('public/src/**/*.js')
+//jsx -> es5
+gulp.task('jsx', function(){
+    return gulp.src('./src/**/*.js')
         .pipe(babel())
-        .pipe(gulp.dest('public/dist'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('sass', () => {
-    sass(['./public/src/style.scss'], {
+    sass(['./src/style.scss'], {
         style: 'expanded' //sass -h
-    }).on('error', sass.logError).pipe(gulp.dest('./public/dist'));
+    }).on('error', sass.logError).pipe(gulp.dest('./dist'));
 });
 
 //default task
-gulp.task('default', ['es5-jsx', 'sass'], function(){
+gulp.task('default', ['jsx', 'sass'], function(){
     
 });

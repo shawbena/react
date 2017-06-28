@@ -1,23 +1,40 @@
 import React from '../react';
 import ReactDOM from '../react-dom';
-import { HashRouter as Router, Route } from '../react-router-dom';
-import { createHashHistory } from '../history';
+import {BrowserRouter as Router, Route } from '../react-router-dom';
+import { createBrowserHistory } from '../history';
 import Home from './home';
 import NewsFeed from './newsFeed';
 import Nav from './nav';
 
-let history = createHashHistory();
-function About(props) {
+let history = createBrowserHistory();
+function Info(props) {
     return (
-        <div id="about">About Page</div>
+        <div id="about">
+            <div>Info Page</div>
+            <div>{props.children}</div>
+        </div>
     );
 }
-function Inbox(props) {
+function Message(props) {
     return (
-        <div id="inbox">Inbox Page</div>
+        <div id="alarm">Message Page</div>
     );
 }
-
+function Order(props) {
+    return (
+        <div id="order">Order Page</div>
+    );
+}
+function Flow(props) {
+    return (
+        <div id="flow">Flow Page</div>
+    );
+}
+function Alarm(props) {
+    return (
+        <div id="alarm">Alarm Page</div>
+    );
+}
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -28,11 +45,12 @@ class App extends React.Component {
             <Router history={history}>
                 <div className="react-root">
                     <Route component={Nav} />
-                    <Route path="/" component={Home}>
-                        <Route path="/about" component={About} />
-                        <Route path="/inbox" component={Inbox} />
+                    <Route path="/info" component={Info}>
+                        <Route path="message" component={Message} />
                     </Route>
-                    <Route path="/news" component={NewsFeed} />
+                    <Route path="/order" component={Order} />
+                    <Route path="/flow" component={Flow} />
+                    <Route path="/alarm" component={Alarm} />
                 </div>
             </Router>
         );

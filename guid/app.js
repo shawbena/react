@@ -13,11 +13,11 @@ var app = express();
 
 //页面路由
 const pageRoutes = [
-    '/',
     '/info',
     '/info/message',
     '/order',
-    '/flow'
+    '/flow',
+    '/alarm'
 ];
 
 // view engine setup
@@ -33,14 +33,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(__dirname));
+console.log(__dirname);
 
 app.use('/', index);
 app.use('/users', users);
 
 app.use(function (req, res, next) {
     let reqUrl = req.originalUrl;
-    console.log(reqUrl);
+
     if (pageRoutes.indexOf(reqUrl) >= 0) {
+        console.log(reqUrl);
         fs.readFile(path.resolve(__dirname, 'index.html'), function (err, data) {
             if (err) {
                 console.log(err);
@@ -48,22 +50,17 @@ app.use(function (req, res, next) {
             } else {
                 res.writeHead(200, {
                     'Content-type': 'text/html',
-                    'Connection':'keep-alive'
+                    // 'Connection': 'keep-alive'
                 });
                 res.end(data);
             }
         });
-    }else{
-        app.use('/', index);
-        app.use('/users', users);
+    } else {
+        // catch 404 and forward to error handler
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
     }
-});
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-
-    err.status = 404;
-    next(err);
 });
 
 // error handler

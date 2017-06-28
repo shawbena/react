@@ -9,16 +9,16 @@ export default class Nav extends React.Component{
         return (
             <ul id="nav">
                 <li>
-                    <a href="#/">Home</a>
+                    <a href="/info">Info</a>
                 </li>
                 <li>
-                    <a href="#/about">About</a>
+                    <a href="/order">Order</a>
                 </li>
                 <li>
-                    <a href="#/inbox">Inbox</a>
+                    <a href="/flow">Flow</a>
                 </li>
                 <li>
-                    <a href="#/news">News</a>
+                    <a href="/alarm">Alarm</a>
                 </li>
             </ul>
         );

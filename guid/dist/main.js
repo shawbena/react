@@ -1,7 +1,7 @@
 require.config({
-    baseUrl: 'dist',
+    baseUrl: '/dist',
 });
 
-require(['./react-router/app'], function(App){
+require(['./refs-and-the-dom/app'], function(App){
     App.bootstrap();
 });

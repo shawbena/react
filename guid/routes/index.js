@@ -16,7 +16,7 @@ router.post('/role/newRole', function(req, res, next){
 });
 
 //配合前端路由
-router.get('/home', function(req, res, next){
+router.get('/haha', function(req, res, next){
   res.send('homepage');
 });
 module.exports = router;

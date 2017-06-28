@@ -70,19 +70,49 @@ define(['exports', '../react', '../react-dom', '../react-router-dom', '../histor
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
-    var history = (0, _history.createHashHistory)();
-    function About(props) {
+    var history = (0, _history.createBrowserHistory)();
+    function Info(props) {
         return _react2.default.createElement(
             'div',
             { id: 'about' },
-            'About Page'
+            _react2.default.createElement(
+                'div',
+                null,
+                'Info Page'
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                props.children
+            )
         );
     }
-    function Inbox(props) {
+    function Message(props) {
         return _react2.default.createElement(
             'div',
-            { id: 'inbox' },
-            'Inbox Page'
+            { id: 'alarm' },
+            'Message Page'
+        );
+    }
+    function Order(props) {
+        return _react2.default.createElement(
+            'div',
+            { id: 'order' },
+            'Order Page'
+        );
+    }
+    function Flow(props) {
+        return _react2.default.createElement(
+            'div',
+            { id: 'flow' },
+            'Flow Page'
+        );
+    }
+    function Alarm(props) {
+        return _react2.default.createElement(
+            'div',
+            { id: 'alarm' },
+            'Alarm Page'
         );
     }
 
@@ -102,7 +132,7 @@ define(['exports', '../react', '../react-dom', '../react-router-dom', '../histor
             key: 'render',
             value: function render() {
                 return _react2.default.createElement(
-                    _reactRouterDom.HashRouter,
+                    _reactRouterDom.BrowserRouter,
                     { history: history },
                     _react2.default.createElement(
                         'div',
@@ -110,11 +140,12 @@ define(['exports', '../react', '../react-dom', '../react-router-dom', '../histor
                         _react2.default.createElement(_reactRouterDom.Route, { component: _nav2.default }),
                         _react2.default.createElement(
                             _reactRouterDom.Route,
-                            { path: '/', component: _home2.default },
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: About }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/inbox', component: Inbox })
+                            { path: '/info', component: Info },
+                            _react2.default.createElement(_reactRouterDom.Route, { path: 'message', component: Message })
                         ),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/news', component: _newsFeed2.default })
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/order', component: Order }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/flow', component: Flow }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/alarm', component: Alarm })
                     )
                 );
             }
