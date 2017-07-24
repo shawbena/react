@@ -37,7 +37,8 @@
       "src/main.js",
       "src/react-router.js",
       "src/history.js",
-      "src/react-router-dom.js"
+      "src/react-router-dom.js",
+      "src/react-without-es6/*.js"
     ],
     "comments": false,
     "minified": false,

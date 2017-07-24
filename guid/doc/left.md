@@ -1,7 +1,13 @@
 addon*.md
+context.md
 higher-order-components.md
+integrating-with-other-libraries.md
 optimizing-performance.md
+react-without-es6.md
+react-without-jsx.md
+reference-pure-render-mixin.md
+reference-react-dom-server.md
 reconcilliation.md
-refs-and-the-dom.md
 thinking-in-react.md
+uncontrolled-components.md
 web-components.md

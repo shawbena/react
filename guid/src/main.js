@@ -2,6 +2,6 @@ require.config({
     baseUrl: '/dist',
 });
 
-require(['./refs-and-the-dom/app'], function(App){
+require(['./react-without-es6/app'], function(App){
     App.bootstrap();
 });
