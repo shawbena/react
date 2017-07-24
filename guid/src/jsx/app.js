@@ -56,7 +56,7 @@ class App extends React.Component {
                 <MixedComponent>
                     aaaaaa
                 </MixedComponent>
-                <ListOfTenThings />
+                <ListOfTenThing/>
             </div>
         );
     }

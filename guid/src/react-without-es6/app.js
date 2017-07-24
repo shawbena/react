@@ -75,6 +75,83 @@ var Greting = React.createClass({
  # Autobinding
 
  声明为 ES6 类的 React 组件中，方法遵循常规 ES6 类中同样的句意。这意味着他们不会自运绑定 this 到实例。你必须在构造函数中明确使用 .bind(this):   //??
+*/
 
- 未完蛋，待续...
+class SayHello extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {message: 'hello!'};
+        //This line is important!
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(){
+        alert(this.state.message);
+    }
+    render(){
+        //Beause `this.handleClick` is bound, we can use it an event handle.
+        return(
+            <button onClick={this.handleClick}>
+                Say Hello
+            </button>
+        );
+    }
+}
+
+/*
+ 对于 createReactClass() 则不必，因为他绑定所有的方法：
+
+ var SayHello = createReactClass({
+     getInitialState: function(){
+         return {message: 'Hello!'};
+     }
+     handleCLick: function(){
+         alert(this.state.message);
+     }
+     render: function(){
+         return (
+             <button onClick={this.handleClick}>
+                Say Hello 
+             </button>
+         );
+     }
+ });
+
+ 这意味着用 ES6 类用于事件处理函数带来了一些更加模板化的代码，但是好处是大应用有好一点的性能。
+
+ 如果这些模板化的代码一点也不吸引你，你可以启用试验性的 [类属性语法](https://babeljs.io/docs/plugins/transform-class-properties/)
+
+ class SayHello extends React.Component {
+     constructor(props){
+         super(props);
+         this.state = {message: 'hello!'};
+     }
+     //WARNNING: this syntax is experimental!
+     //Using an arrow here binds the method:
+     handleClick = () => {
+         alert(this.state.message);
+     }
+     render(){
+         return (
+             <button onClick={this.handleClick}>
+                Say hello
+             </button>
+         );
+     }
+ }
+
+ 请注意上面的语法是实验性的，可能会有所变化，或者提案会被写入该语言。
+
+ 如果你想保险点, 你有以下选项：
+
+ - 在构造函数中绑定方法
+
+ - 使用箭头函数，如: onClick={(e) => this.handleClick(e)}
+
+ - 继续使用 createReactClass
+
+*/
+
+/*
+ # Mixins
+  ES6起没有任何 mixin 支持。因此，当你使用 React 与 ES6 时没有 mixins 支持。当使用 ES6 时不支持。我们也发现 codebases 中使用 mixins 有数不尽的问题，新的代码中我们不推荐使用。
 */
