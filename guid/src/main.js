@@ -1,7 +1,10 @@
 require.config({
     baseUrl: '/dist',
+    paths: {
+        react: 'react-with-addons'
+    }
 });
 
-require(['./react-without-es6/app'], function(App){
+require(['./addons/addons-animation'], function(App){
     App.bootstrap();
 });

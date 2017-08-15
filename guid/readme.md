@@ -1,17 +1,27 @@
 # react-guid
 
-## previous
-
-react-without-es6
-
-## next
-
-react-without-jsx
-
-## maybe next
-
-thinking-in-react
+context
 
 higher-order-components
 
-composition-vs-inheritance
+integrating-with-other-libraries
+
+optimizing-performance
+
+reconcilliation
+
+reference-dom-elements
+
+reference-pure-render-mixin
+
+reference-react-component
+
+reference-react-dom-server
+
+reference-react-dom
+
+reference-react
+
+typechecking-with-proptypes
+
+web-components
