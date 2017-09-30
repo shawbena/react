@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom';
 /*
  # addons-animation
 
- ReactTransitionGroup 和 ReactCSSTransitionGroup 在 React 15.5.0 已废弃。推荐使用来自 [react-transition-group](https://github.com/reactjs/react-transition-group) 的 TransitionGroup 和 CSSTransitionGroup.
 
- ReactTransitionGroup add-on 组件是一个用于动画的低层次的 API，ReactCSSTransitionGroup 是一个易于实现基本的 CSS 动画和过渡的 add-on 组件。
 */
 
 /*
- # High-level API: ReactCSSTransitionGroup
 
- ReactCSSTransitionGroup 是一个基于 ReactTransitionGroup 的高层次的 API，容易实现 CSS 转换和动画，当一个 React 组件进入或离开 DOM 时。他受极好的 [ng-animate]() 库激励。
+
+
  
  import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
  //es6
