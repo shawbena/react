@@ -7,7 +7,7 @@ const duration = 300;
 const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out`,
     opacity: 0
-};
+}
 
 const transitionStyles = {
     entering: { opacity: 1 },
@@ -15,10 +15,9 @@ const transitionStyles = {
 }
 
 //??
-const Fade = ({ in: inProp }) => {
-    console.log();
+export const Fade = (props) => {
     return (
-        <Transition in={inProp} timeout={duration}>
+        <Transition in={props.in} timeout={duration}>
             {
                 (state) => (
                     <div style={{
@@ -26,6 +25,7 @@ const Fade = ({ in: inProp }) => {
                         ...transitionStyles[state]
                     }}>
                         I'm A fade Transition
+                        {props.children}
             </div>
                 )
             }

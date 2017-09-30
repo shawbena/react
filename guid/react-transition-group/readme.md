@@ -214,6 +214,13 @@ default: `function noop() {}`
 
 ## TransitionGroup
 
+`<TransitionGroup>` 组件管理在一个列中管理一个集合的 `<Transition>` 组件。 类似 `<Transition>` 组件，`<TransitionGroup>` 组件是一个管理随时间变化组件挂载和卸载的状态机器。
+
+考虑到下面例子用到了之间的 `Fade` 的 CSS. 当项从 TodoList 插入或移除时， `<TransitionGroup>` 自动切换 `in` 属性。你可以在 `<TransitionGroup>` 中使用作何 `<Transition>` 组件，而不仅是 css.
+
+```js
+```
+
 ## CSSTransition
 
 使用 CSS transition 和 animation 的 `Transition` 组件。受优秀的 [ng-animate](http://www.nganimate.org/) 库激励。

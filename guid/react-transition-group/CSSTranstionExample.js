@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import './style.scss';
 
-const Fade = ({ children, ...props }) => (
-    <CSSTransition {...props} timeout={500} classNames="fade">{children}</CSSTransition>
-);
-
 class FadeInOut extends React.Component{
     constructor(props){
         super(props);
@@ -17,9 +13,9 @@ class FadeInOut extends React.Component{
     }
     render(){
         return (
-            <Fade in={this.state.show}>
+            <CSSTransition in={this.state.show} timeout={1000} classNames="fade">
                 <div>Hello world</div>
-            </Fade>
+            </CSSTransition>
         );
     }
 }

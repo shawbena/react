@@ -9,7 +9,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'dist')
     },
     entry: {
-        app: './TransitionExample.js'
+        app: './CSSTranstionExample.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -41,6 +41,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Animation',
             filename: 'index.html'
-        })
+        }),
+        new CleanWebpackPlugin(['dist'])
     ]
 };
