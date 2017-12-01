@@ -157,5 +157,5 @@ const element = {
 下一节我们将探索将 React 元素渲染到 DOM。
 
 > __Tip__
-
+>
 > 我们推荐你选择编辑器时使用 ["Babel" language definition](http://babeljs.io/docs/editors) 以正确 (properly) 高亮 ES6 和 JSX 代码。本网站使用兼容的 [Oceanic Next](https://labs.voronianski.com/oceanic-next-color-scheme/) 主体色。
