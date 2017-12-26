@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-
+import bootstrap from '../../bootstrap';
 class Toggle extends React.Component {
     constructor(props) {
         super(props);
@@ -25,6 +25,4 @@ class Toggle extends React.Component {
     }
 }
 
-let root = document.createElement('div');
-document.body.appendChild(root);
-render(<Toggle />, root);
+bootstrap(Toggle);

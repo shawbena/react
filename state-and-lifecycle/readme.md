@@ -399,6 +399,7 @@ function FormattedDate(props){
 这通常叫 "top-down" 或 "unidirectional" 数据流。任何 state 总是由特定的组件持有，继承那个 state 的任何数据或 UI 只影响下树下面的组件。
 
 如果你把组件树想像为 props 的瀑布流，每个组件的状态就像一个额外的水源，在任意节点汇入但向下流动。
+
 为了展示所有的组件都是完全孤立的，我们创建一个渲染三个 `<Clock>` 的 `APp` 组件:
 
 ```jsx

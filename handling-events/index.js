@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import bootstrap from '../bootstrap';
 
 function ActionLink() {
     function handleClick(e) {
@@ -14,6 +15,4 @@ function ActionLink() {
     );
 }
 
-let root = document.createElement('div');
-document.body.appendChild(root);
-render(<ActionLink />, root);
+bootstrap(ActionLink);

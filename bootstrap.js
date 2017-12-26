@@ -7,6 +7,7 @@ import { render } from 'react-dom';
  */
 export default (App, props) => {
     let root = document.createElement('div');
+    root.id = 'app';
     document.body.appendChild(root);
     render(<App {...props} />, root);
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import bootstrap from '../bootstrap';
 
 class Clock extends Component {
     state = {
@@ -32,6 +33,4 @@ class Clock extends Component {
     }
 }
 
-let root = document.createElement('div');
-document.body.appendChild(root);
-render(<Clock />, root);
+bootstrap(Clock);

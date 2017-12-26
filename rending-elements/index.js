@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import bootstrap from '../bootstrap';
 
 // class App extends React.Component{
 //     state = {};
@@ -18,8 +19,4 @@ import ReactDOM from 'react-dom';
 
 const element = <h1>Hello, world</h1>;
 
-let root = document.createElement('div');
-root.id = 'root';
-document.body.appendChild(root);
-
-ReactDOM.render(element, root);
+bootstrap(element);

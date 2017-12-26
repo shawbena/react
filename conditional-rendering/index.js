@@ -19,4 +19,4 @@ function Greeting(props){
 }
 
 // Try changing to isLoggedIn={true}
-bootstrap(Greeting, { isLoggedIn: true })
+bootstrap(Greeting, { isLoggedIn: true });
