@@ -36,6 +36,15 @@ const apps = [{
 	   'preventComponentFromRending': 'prevent-component-from-rending'
    },
 }, {
+    dir: 'jsx-in-depth',
+    entry: {
+        app: '',
+        dotNotation: 'dot-notation',
+        spreadAttributes: 'spread-attributes',
+        pickProps: 'pick-props',
+        javascriptExpressionAsChildren: 'javascript-expression-as-children'
+    }
+},{
    dir: 'list-and-keys',
    entry: {
 	   app: '',
@@ -47,7 +56,7 @@ const apps = [{
            easyForm: 'easy-form',
            flavorForm: 'flavor-form',
            reservation: 'reservation',
-           'nullValue': 'null-value'
+           nullValue: 'null-value'
        }
    }, 'lifting-state-up'
 ];
