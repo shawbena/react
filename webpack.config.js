@@ -17,7 +17,7 @@ const commonConfig = {
     },
     module: {
         rules: [{
-            test: /\.js$/,
+            test: /\.jsx?$/,
             use: 'babel-loader',
             exclude: /node_modules/
         }, {
@@ -29,6 +29,10 @@ const commonConfig = {
                 }
             }
         }, {
+            test: /\.tsx?/,
+            use: 'awesome-typescript-loader',
+            exclude: /node_modules/
+        },{
             test: /\.s?css$/,
             use: ['style-loader', 'css-loader', 'sass-loader']
         }]
@@ -38,7 +42,10 @@ const commonConfig = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common'
         })
-    ]
+    ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+    }
 };
 
 const configs = apps.map((app) => {
