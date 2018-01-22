@@ -58,7 +58,15 @@ const apps = [{
            reservation: 'reservation',
            nullValue: 'null-value'
        }
-   }, 'lifting-state-up'
+   }, 'lifting-state-up',{
+       dir: 'refs-and-the-dom',
+       entry: {
+           app: '',
+           'addARefToAClassComponent': 'add-a-ref-to-a-class-component',
+           refsAndFunctionalComponent: 'refs-and-functional-component',
+           'exportingDomRefsToParentComponent': 'exporting-dom-refs-to-parent-component'
+       }
+   }
 ];
 
 module.exports = apps;
