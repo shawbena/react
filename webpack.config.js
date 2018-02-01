@@ -8,7 +8,9 @@ const apps = require('./apps');
 const commonConfig = {
     devtool: 'cheap-source-map',
     // context: '',
-    // entry:{},
+    // entry:{
+        
+    // },
     output: {
         // publicPath: '/',
         // path: path.resolve(__dirname, 'build'),

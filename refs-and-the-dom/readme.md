@@ -5,7 +5,7 @@
 
 在典型的 React 数据流中，[props](/components-and-props/) 是父子组件交互的唯一方式。要修改子组件，你用新属性渲染。而有一些情形中，你需要在典型的数据流之外修改子组件。要修改的子组件可以是 React 组件或是一个 DOM 元素。对于这两种情形，React 都准备了应急措施 (escape hatch).
 
-## Whehn to Use Refs
+## When to Use Refs
 
 对于 refs 有几种好的使用情形：
 
@@ -161,7 +161,7 @@ bootstrap(CustomTextInput);
 
 ## Exposing DOM Refs to Parent Components
 
-在父组件中访问子组件中的 DOM 节点是罕见的。通常不推荐这样做，因为这破坏了组件封装，偶尔用用着，如触发子 DOM 节点焦点或测量其大小或位置。
+在父组件中访问子组件中的 DOM 节点是罕见的。通常不推荐这样做，因为这破坏了组件封装，偶尔用着，如触发子 DOM 节点焦点或测量其大小或位置。
 
 虽然你可以给子组件添加一个[引用 (ref)](#add-a-ref-to-the-child-component), 但这并不是理想的解决办法，因为这样做你将得到一个组件实例而非一个 DOM 节点。而且，这也不能用于函数功能组件。
 

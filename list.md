@@ -1,8 +1,4 @@
-# List
-
-Content list.
-
-## QUICK START
+# QUICK START
 
 - Introducing JSX
 
@@ -24,7 +20,7 @@ Content list.
 
 - Composition vs Inheritance
 
-## ADVANCE GUIDES
+# ADVANCE GUIDES
 
 - JSX in Depth
 
@@ -58,7 +54,7 @@ Content list.
 
 - Accessibility
 
-## REFERENCE
+# REFERENCE
 
 - React
 
@@ -82,7 +78,7 @@ Content list.
 
 - Glossary
 
-## CONTRIBUTING
+# CONTRIBUTING
 
 - How to Contribute
 
@@ -92,7 +88,7 @@ Content list.
 
 - Design Principles
 
-## FAQ
+# FAQ
 
 - AJAX and APIS
 
@@ -110,6 +106,4 @@ Content list.
 
 
 
-##
-
-refs-and-the-dom
+#

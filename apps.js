@@ -66,6 +66,13 @@ const apps = [{
            refsAndFunctionalComponent: 'refs-and-functional-component',
            'exportingDomRefsToParentComponent': 'exporting-dom-refs-to-parent-component'
        }
+   },{
+       dir: 'typechecking-with-proptypes',
+       entry: {
+           app: '',
+           singleChild: 'single-child',
+           defaultProps: 'default-props'
+       }
    }
 ];
 
