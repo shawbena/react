@@ -73,6 +73,11 @@ const apps = [{
            singleChild: 'single-child',
            defaultProps: 'default-props'
        }
+   },{
+       dir: 'context',
+       entry: {
+           app: ''
+       }
    }
 ];
 
