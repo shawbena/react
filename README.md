@@ -22,24 +22,8 @@ React 使得可以无痛创建交互性 UI. 为你程序的每个状态设置不
 
 使用 Node, React 可以在服务端渲染，使用 React Native 创建强大的 mobile apps.
 
-# TypeScript
+## Native JavaScript Programming Experience
 
-引入 TypeScript 以更好了解 JavaScript。React 的一些库类型声明文件真的很棒，很有助于学习 TypeScript.
-
-# Experiences with React
-
-这个 React 指南是翻译自 [React 官方文档](https://reactjs.org/docs/)。很多示例使用 [TypeScript](http://www.typescriptlang.org/) 写的。我翻译了官方文档，也可以说是我翻译的笔记。我尽量保留原意，少写个人见解。
-
-## Documents are Necessary
-
-React 是一个更新很快的库，很庆幸我一开始就参考的是官方的文档，基本上项目中遇到的问题在 React 官方文档中都能找到解决方法。实在不行就去 github 上看一看。网上的博客我也看过，博客类似于代码编后感，是经验之谈。有完整的可参阅的文档才能遇到我们使用中遇到的各种各样的问题。React 在这一点做的很好。[React 社区](https://reactjs.org/community/support.html), 及 React 开发人员的建议都能我们很好的解决问题。
-
-## Deep into JavaScript Programming Experience
-
-React 带给人的编程体验就好像是原生开发体验。如果使用 ES6 语法 及 TypeScript 支持，感觉好像是在写 Java 代码。这种写法可能与 ES6+ 给我们带来的未来 JavaScript 编译体验很相近。也许 JavaScript 将来会演化成 Java 的 "Script".
+在使用 React 的过程中，我发现 React 的文档能解决项目中的大部分问题，于是就把她翻译下来了，以便以后参考及完善，虽然不能尽善尽美，但我尽量保留原意。
 
 React 相比其他库更吸引人的一点是，不用太多关注 DOM 操作，没有繁索的指令，模板，注入等等，React 把复杂的 Web 开发封装起来，提供精简的接口。开发者只要有清淅的组件实现逻辑，没有什么逻辑实现比一门原生的编程语言更容易实现了。在 JavaScript 实现模板中模板语言复杂的功能，视图的组合等等，用 React，借助 JavaScript 的语言能力，变得更加简单。
-
-## React is to hard to learn?
-
-很多人觉得 React 难学，React 难学吗？React 学习在难点是，React 的用法就像是原生 JavaScript, 你学习 React，你是在学习整个 Web 知识。如果你惯用现成的库，那 React 真的太难学了。不管你用什么库，一个项目的总体难度是不变的的，如果库不帮你实现，那你就要自己实现。
