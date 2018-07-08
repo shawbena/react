@@ -108,15 +108,10 @@
 
 #
 
-context, typechecking with prop-types, prop-types api
+update:
 
-React without es6
+refs and dom
 
-React without jsx
-
-static type checking, accessibility
-
-portal
 
 
 
