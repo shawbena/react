@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Context - Updating from a Nexted Component</title>
+    <script src="../../node_modules/requirejs/require.js"></script>
+    <script>
+        requirejs.config({
+            baseUrl: 'dist',
+            paths: {
+                react: '../../node_modules/react/umd/react.development',
+                'react-dom': '../../node_modules/react-dom/umd/react-dom.development',
+                'bootstrap': '../../lib/bootstrap'
+            }
+        });
+        require(['exporting-dom-refs-to-parent-component/index']);
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

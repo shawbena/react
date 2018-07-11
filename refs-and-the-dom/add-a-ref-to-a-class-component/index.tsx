@@ -1,13 +1,18 @@
 import * as React from 'react';
 import CustomTextInput from '../CustomTextInput';
-import bootstrap from '../../bootstrap';
+import bootstrap from 'bootstrap';
 
 class AutoFocusTextInput extends React.Component{
     
-    private textInput: CustomTextInput | null;
+    private textInput: React.RefObject<CustomTextInput>;
+
+    constructor(props: any){
+        super(props);
+        this.textInput = React.createRef<CustomTextInput>();
+    }
     
     componentDidMount(){
-        this.textInput && this.textInput.focusTextInput();
+        this.textInput.current && this.textInput.current.focusTextInput();
     }
     
     loadHello = () => {
@@ -17,11 +22,10 @@ class AutoFocusTextInput extends React.Component{
     render(){
         return(
             <div>
-                <CustomTextInput ref={(input) => this.textInput = input} />
+                <CustomTextInput ref={this.textInput} />
                 <button onClick={this.loadHello}>Load Hello</button>
             </div>
         );
     }
 }
-
 bootstrap(AutoFocusTextInput);

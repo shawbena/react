@@ -1,8 +1,8 @@
 import * as React from 'react';
-import bootstrap from '../../bootstrap';
+import bootstrap from 'bootstrap';
 
 interface CustomTextInputProps{
-    inputRef: (ref: HTMLInputElement) => void;
+    inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 function CustomTextInput(props: CustomTextInputProps){
@@ -16,15 +16,16 @@ function CustomTextInput(props: CustomTextInputProps){
 class Parent extends React.Component{
     constructor(props:any){
         super(props);
+        this.ref = React.createRef<HTMLInputElement>();
     }
 
-    private inputElement: HTMLInputElement | null; //正如自我约束一样，添加 null 是一个良好的实践
+    private ref: React.RefObject<HTMLInputElement>; //正如自我约束一样，添加 null 是一个良好的实践
     componentDidMount(){
-        this.inputElement && this.inputElement.focus();
+        this.ref.current && this.ref.current.focus();
     }
     render(){
         return(
-            <CustomTextInput inputRef={el => this.inputElement = el}/>
+            <CustomTextInput inputRef={this.ref}/>
         );
     }
 }

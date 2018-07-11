@@ -1,17 +1,17 @@
 import * as React from 'react';
-import bootstrap from '../../bootstrap';
+import bootstrap from 'bootstrap'
 
 function CustomTextInput(){
     // txtInput must be declared here so the ref callback can refer to it
-    let textInput: HTMLInputElement | null;
+    let textInput = React.createRef<HTMLInputElement>();
 
     function handleClick(){
-        textInput && textInput.focus();
+        textInput.current && textInput.current.focus();
     }
 
     return(
         <div>
-            <input type="text" ref={(input) => textInput = input }/>
+            <input type="text" ref={textInput}/>
             <input type="button"
                 value="Focus the text input" 
                 onClick={handleClick}
